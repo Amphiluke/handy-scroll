@@ -14,11 +14,13 @@ The widget requires the CSS file [handy-scroll.css](dist/handy-scroll.css) to be
 
 :bulb: **Tip:** If you don’t care about supporting Internet Explorer, feel free to use the file [handy-scroll.es6.min.js](dist/handy-scroll.es6.min.js), which is de facto the same as handy-scroll.min.js but is written in ES6, and is a bit smaller.
 
+<!--
 The handy-scroll package is available on npm, so you may add it to your project as usual:
 
 ```
 npm install handy-scroll
 ```
+-->
 
 ## Details & API
 
@@ -66,7 +68,7 @@ console.log(handyScroll.mounted("#spacious-container")); // true
 
 ### Updating scrollbar
 
-If you mount the widget in a container whose size and/or content may dynamically change, then you need a way to update the scrollbar each time the container’s sizes change. This can be done by invoking the method `handyScroll.update()` as in example below.
+If you mount the widget in a container whose size and/or content may dynamically change, then you need a way to update the scrollbar each time the container’s sizes change. This can be done by invoking the method `handyScroll.update()` as in the example below.
 
 ```javascript
 handyScroll.mount(".spacious-container");
