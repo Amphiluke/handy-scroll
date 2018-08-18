@@ -6,7 +6,7 @@ Handy dependency-free floating scrollbar widget
 
 The general purpose of the handy-scroll module is to provide some lengthy containers with a separate horizontal scrollbar, which doesn’t get out of sight when the page is scrolled. So, the user will always be able to scroll the container horizontally even if its own scrollbar is outside the viewport.
 
-If you are rather looking for a jQuery plugin with the same functionality, please check out the [floating-scroll project](https://github.com/Amphiluke/floating-scroll) instead.
+:bulb: **Tip:** If you are rather looking for a jQuery plugin with the same functionality, please check out the [floating-scroll project](https://github.com/Amphiluke/floating-scroll) instead.
 
 ## Usage
 
@@ -110,12 +110,10 @@ handyScroll.mount(".spacious-container");
 
 The [handy-scroll.css](dist/handy-scroll.css) file provides some basic styles for elements with classes `.handy-scroll-viewport` and `.handy-scroll-body`. Feel free to adjust their styles in your stylesheets as needed.
 
-### Tips
+### “Unobtrusive” mode
 
 You can make the widget more “unobtrusive” so that it will appear only when the mouse pointer hovers over the scrollable container. To do so just apply the class `handy-scroll-hoverable` to the desired scrollable container owning the widget.
 
-<!--
 ## Live demos
 
 Check out some usage demos [here](https://amphiluke.github.io/handy-scroll/).
--->
