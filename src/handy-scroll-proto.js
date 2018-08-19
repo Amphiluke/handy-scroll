@@ -80,7 +80,7 @@ let handyScrollProto = {
         }
         if (instance.visible === mustHide) {
             instance.visible = !mustHide;
-            // We cannot simply hide the scroll bar since its scrollLeft property will not update in that case
+            // We cannot simply hide the scrollbar since its scrollLeft property will not update in that case
             widget.classList.toggle("handy-scroll-hidden");
         }
     },

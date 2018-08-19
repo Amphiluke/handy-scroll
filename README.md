@@ -4,9 +4,9 @@ Handy dependency-free floating scrollbar widget
 
 ## Synopsis
 
-The general purpose of the handy-scroll module is to provide some lengthy containers with a separate horizontal scrollbar, which doesn’t get out of sight when the page is scrolled. So, the user will always be able to scroll the container horizontally even if its own scrollbar is outside the viewport.
+handy-scroll is a dependency-free module which can be used to solve the problem of scrolling some lengthy containers horizontally when those containers don’t fit into the viewport. The widget is just a scrollbar which is attached at the bottom of the container’s visible area. It doesn’t get out of sight when the page is scrolled, thereby making horizontal scrolling of the container much handier.
 
-:bulb: **Tip:** If you are rather looking for a jQuery plugin with the same functionality, please check out the [floating-scroll project](https://github.com/Amphiluke/floating-scroll) instead.
+:bulb: **Tip:** If you are rather looking for a jQuery plugin with the same functionality, please check out the sister project [floating-scroll](https://github.com/Amphiluke/floating-scroll) instead.
 
 ## Usage
 
@@ -14,13 +14,11 @@ The widget requires the CSS file [handy-scroll.css](dist/handy-scroll.css) to be
 
 :bulb: **Tip:** If you don’t care about supporting Internet Explorer, feel free to use the file [handy-scroll.es6.min.js](dist/handy-scroll.es6.min.js), which is de facto the same as handy-scroll.min.js but is written in ES6, and is a bit smaller.
 
-<!--
 The handy-scroll package is available on npm, so you may add it to your project as usual:
 
 ```
 npm install handy-scroll
 ```
--->
 
 ## Details & API
 
