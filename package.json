@@ -1,7 +1,7 @@
 {
   "name": "handy-scroll",
   "version": "1.0.0",
-  "description": "Handy dependency-free floating scrollbar",
+  "description": "Handy dependency-free floating scrollbar widget",
   "main": "dist/handy-scroll.min.js",
   "module": "src/handy-scroll.js",
   "style": "dist/handy-scroll.css",
@@ -28,11 +28,11 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^5.3.0",
+    "eslint": "^5.4.0",
     "husky": "^1.0.0-rc.13",
-    "less": "^3.8.0",
+    "less": "^3.8.1",
     "less-plugin-clean-css": "^1.5.1",
-    "rollup": "^0.64.0",
+    "rollup": "^0.64.1",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-terser": "^1.0.1"
   },
