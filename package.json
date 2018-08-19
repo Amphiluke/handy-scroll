@@ -28,6 +28,7 @@
     "normalize.css": "^8.0.0"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "handy-scroll": "^1.0.0"
   }
 }
