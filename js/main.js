@@ -1,11 +1,12 @@
 (function () {
 
-let body = document.body;
+let doc = document;
+let body = doc.body;
 let handyScroll = window.handyScroll;
 
 let dom = {
     $i(id) {
-        return document.getElementById(id);
+        return doc.getElementById(id);
     },
     $t(className, context = body) {
         return Array.from(context.getElementsByTagName(className));
@@ -61,10 +62,10 @@ dom.$i("hs-open-popup").addEventListener("click", e => {
     popupContainer.scrollLeft = popupContainer.scrollWidth;
     handyScroll.update(popupContainer);
     e.stopPropagation();
-    body.addEventListener("click", function popupOutClick({target}) {
+    doc.addEventListener("click", function popupOutClick({target}) {
         if (target.classList.contains("hs-popup-close") || !popup.contains(target)) {
             popup.classList.add("hs-popup-hidden");
-            body.removeEventListener("click", popupOutClick, false);
+            doc.removeEventListener("click", popupOutClick, false);
         }
     }, false);
 }, false);

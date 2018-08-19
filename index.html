@@ -23,8 +23,8 @@
             <h2>#1: Handscrolls</h2>
 
             <h3>Description</h3>
-            <p>Using of the <code>handy-scroll</code> widget can be appropriate for an online exhibiting of large <a href="https://en.wikipedia.org/wiki/Handscroll" rel="nofollow" target="_blank">handscrolls</a>. The demo below shows some use cases for the API methods <a href="https://github.com/Amphiluke/handy-scroll#updating-scrollbar"><code>update</code></a>, <a href="https://github.com/Amphiluke/handy-scroll#destroying-the-widget"><code>destroy</code></a>, and <a href="https://github.com/Amphiluke/handy-scroll#checking-widget-existence"><code>mounted</code></a>.</p>
-            <p>Click the “tabs” to switch over the paintings, and the widget parameters will update accordingly (note that handscrolls are viewed starting from the right end). Click “Disable/Enable” to destroy/remount the widget.</p>
+            <p>Using of the <code>handy-scroll</code> widget can be appropriate for an online exhibiting of large <a href="https://en.wikipedia.org/wiki/Handscroll" rel="nofollow" target="_blank">handscrolls</a>.</p>
+            <p>The demo below shows some use cases for the API methods <a href="https://github.com/Amphiluke/handy-scroll#updating-scrollbar"><code>update</code></a>, <a href="https://github.com/Amphiluke/handy-scroll#destroying-the-widget"><code>destroy</code></a>, and <a href="https://github.com/Amphiluke/handy-scroll#checking-widget-existence"><code>mounted</code></a>. Click the “tabs” to switch over the paintings, and the widget parameters will update accordingly (note that handscrolls are viewed starting from the right end). Click “Disable/Enable” to destroy/remount the widget.</p>
 
             <h3>Live demo</h3>
             <div>
@@ -88,10 +88,11 @@ document.getElementById("handscrolls-toggle").addEventListener("click", ({target
                     <div id="qingming-fest" class="hs-demo hs-qingming">
                         <img src="img/along-the-river.jpg" alt="“Along the River During the Qingming Festival” by Zhang Zeduan" width="10561" height="1000">
                     </div>
+                    <p class="small"><a href="https://en.wikipedia.org/wiki/Along_the_River_During_the_Qingming_Festival" rel="nofollow" target="_blank"><em>“Along the River During the Qingming Festival”</em></a> (fragment), painting by Zhang Zeduan (12th century)</p>
                 </div>
             </div>
 
-            <h3>Demo code (key parts)</h3>
+            <h3>Demo’s code (key parts)</h3>
             <h4>HTML:</h4>
             <pre class="hs-code"><span class="hs-highlight">&lt;!-- Apply the "handy-scroll-viewport" class to the popup block --&gt;</span>
 &lt;div class="hs-popup hs-popup-hidden <span class="hs-highlight">handy-scroll-viewport</span>"&gt;
@@ -140,7 +141,7 @@ document.getElementById("hs-open-popup").addEventListener("click", e => {
             <h3>Live demo</h3>
             <form action="#" autocomplete="off">
                 <label><input type="checkbox" id="is-unobtrusive"> Unobtrusive mode <b></b></label><br>
-                <small>Check/uncheck this checkbox to toggle the “unobtrusive” mode for all widget instances on this page</small>
+                <span class="small">Check/uncheck this checkbox to toggle the “unobtrusive” mode for all widget instances on this page</span>
             </form>
         </section>
     </main>
