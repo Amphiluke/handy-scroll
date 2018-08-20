@@ -81,7 +81,7 @@ header {
             content:"📜";
             display:block;
             font-size:3em;
-            transform:rotate(-45deg);
+            transform:rotate(-44deg); // using -45deg results in disappearing of the icon on Mac & iOS!
         }
     }
 }
@@ -112,6 +112,7 @@ main {
     &-ctrl {
         display:flex;
         padding:0 0.5em 0.5em;
+        position:-webkit-sticky;
         position:sticky;
         text-shadow:1px 1px 1px @bg-color, -1px -1px 1px @bg-color, 1px -1px 1px @bg-color, -1px 1px 1px @bg-color;
         top:0;
