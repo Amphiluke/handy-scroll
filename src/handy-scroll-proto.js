@@ -117,6 +117,7 @@ let handyScrollProto = {
             widget.style.left = `${containerRect.left}px`;
         }
         widget.firstElementChild.style.width = `${container.scrollWidth}px`;
+        instance.syncWidget();
         instance.checkVisibility(); // fixes issue Amphiluke/floating-scroll#2
     },
 

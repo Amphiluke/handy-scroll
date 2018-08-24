@@ -1,5 +1,5 @@
 /*!
-handy-scroll v1.0.0
+handy-scroll v1.0.1
 https://amphiluke.github.io/handy-scroll/
 (c) 2018 Amphiluke
 */
@@ -166,6 +166,7 @@ https://amphiluke.github.io/handy-scroll/
                 widget.style.left = containerRect.left + "px";
             }
             widget.firstElementChild.style.width = container.scrollWidth + "px";
+            instance.syncWidget();
             instance.checkVisibility(); // fixes issue Amphiluke/floating-scroll#2
         },
 
