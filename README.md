@@ -6,7 +6,7 @@ Handy dependency-free floating scrollbar widget
 
 handy-scroll is a dependency-free module which can be used to solve the problem of scrolling some lengthy containers horizontally when those containers don’t fit into the viewport. The widget is just a scrollbar which is attached at the bottom of the container’s visible area. It doesn’t get out of sight when the page is scrolled, thereby making horizontal scrolling of the container much handier.
 
-:bulb: **Tip:** If you are rather looking for a jQuery plugin with the same functionality, please check out the sister project [floating-scroll](https://github.com/Amphiluke/floating-scroll) instead.
+:bulb: **Tip:** If you are rather looking for a jQuery plugin with the same functionality, please check out the sibling project [floating-scroll](https://github.com/Amphiluke/floating-scroll) instead.
 
 ## Usage
 
