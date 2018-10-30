@@ -1,5 +1,5 @@
 {
   "presets": [
-    ["env", {"modules": false, "loose": true}]
+    ["@babel/env", {"modules": false, "loose": true}]
   ]
 }
