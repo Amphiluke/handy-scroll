@@ -1,5 +1,5 @@
 /*!
-handy-scroll v1.0.1
+handy-scroll v1.0.2
 https://amphiluke.github.io/handy-scroll/
 (c) 2018 Amphiluke
 */
@@ -149,10 +149,9 @@ https://amphiluke.github.io/handy-scroll/
         update() {
             let instance = this;
             let {widget, container, scrollBody} = instance;
-            let containerRect = container.getBoundingClientRect();
-            widget.style.width = `${containerRect.width}px`;
+            widget.style.width = `${container.clientWidth}px`;
             if (!scrollBody) {
-                widget.style.left = `${containerRect.left}px`;
+                widget.style.left = `${container.getBoundingClientRect().left}px`;
             }
             widget.firstElementChild.style.width = `${container.scrollWidth}px`;
             instance.syncWidget();
