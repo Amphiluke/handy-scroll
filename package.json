@@ -4,7 +4,7 @@
   "description": "Live demos for the handy-scroll project",
   "main": "js/main.js",
   "scripts": {
-    "copyDependencies": "copyfiles -f node_modules/handy-scroll/dist/handy-scroll.min.js node_modules/babel-polyfill/dist/polyfill.min.js js",
+    "copyDependencies": "copyfiles -f node_modules/handy-scroll/dist/handy-scroll.min.js node_modules/@babel/polyfill/dist/polyfill.min.js js",
     "build": "babel js/main.js --out-file js/main.min.js && lessc --clean-css=\"--advanced\" css/main.less css/main.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,16 +19,17 @@
   },
   "homepage": "https://amphiluke.github.io/handy-scroll/",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-minify": "^0.4.3",
-    "copyfiles": "^2.0.0",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-preset-minify": "^0.5.0",
+    "copyfiles": "^2.1.0",
     "less": "^3.8.1",
     "less-plugin-clean-css": "^1.5.1",
     "normalize.css": "^8.0.0"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "handy-scroll": "^1.0.1"
+    "@babel/polyfill": "^7.0.0",
+    "handy-scroll": "^1.0.2"
   }
 }
