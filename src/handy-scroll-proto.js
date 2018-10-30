@@ -111,10 +111,9 @@ let handyScrollProto = {
     update() {
         let instance = this;
         let {widget, container, scrollBody} = instance;
-        let containerRect = container.getBoundingClientRect();
-        widget.style.width = `${containerRect.width}px`;
+        widget.style.width = `${container.clientWidth}px`;
         if (!scrollBody) {
-            widget.style.left = `${containerRect.left}px`;
+            widget.style.left = `${container.getBoundingClientRect().left}px`;
         }
         widget.firstElementChild.style.width = `${container.scrollWidth}px`;
         instance.syncWidget();
