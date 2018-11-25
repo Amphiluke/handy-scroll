@@ -112,6 +112,10 @@ The [handy-scroll.css](dist/handy-scroll.css) file provides some basic styles fo
 
 You can make the widget more “unobtrusive” so that it will appear only when the mouse pointer hovers over the scrollable container. To do so just apply the class `handy-scroll-hoverable` to the desired scrollable container owning the widget.
 
+### Integration with Angular
+
+If you have problems with the widget integration into your Angular app, please consult [this instruction](doc/angular-integration.md) first.
+
 ## Live demos
 
 Check out some usage demos [here](https://amphiluke.github.io/handy-scroll/).
