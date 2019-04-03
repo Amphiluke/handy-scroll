@@ -1,7 +1,7 @@
 /*!
 handy-scroll v1.0.2
 https://amphiluke.github.io/handy-scroll/
-(c) 2018 Amphiluke
+(c) 2019 Amphiluke
 */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -123,6 +123,8 @@ https://amphiluke.github.io/handy-scroll/
         if (!mustHide) {
           var containerRect = container.getBoundingClientRect();
           var maxVisibleY = scrollBody ? scrollBody.getBoundingClientRect().bottom : window.innerHeight || dom.html.clientHeight;
+          var scrollMarginBottom = parseInt(window.getComputedStyle(widget).marginBottom);
+          maxVisibleY -= scrollMarginBottom;
           mustHide = containerRect.bottom <= maxVisibleY || containerRect.top > maxVisibleY;
         }
 

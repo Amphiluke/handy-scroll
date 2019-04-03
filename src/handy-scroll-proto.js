@@ -76,6 +76,11 @@ let handyScrollProto = {
             let maxVisibleY = scrollBody ?
                 scrollBody.getBoundingClientRect().bottom :
                 window.innerHeight || dom.html.clientHeight;
+
+            let scrollMarginBottom = parseInt(window.getComputedStyle(widget).marginBottom);
+
+            maxVisibleY -= scrollMarginBottom;
+
             mustHide = ((containerRect.bottom <= maxVisibleY) || (containerRect.top > maxVisibleY));
         }
         if (instance.visible === mustHide) {
