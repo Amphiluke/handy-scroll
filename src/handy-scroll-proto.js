@@ -11,9 +11,17 @@ let handyScrollProto = {
         instance.container = container;
         instance.visible = true;
         instance.initWidget();
-        instance.update(); // recalculate scrollbar parameters and set its visibility
         instance.syncWidget();
         instance.addEventHandlers();
+        instance.initResizeObserver();
+    },
+
+    initResizeObserver() {
+        let instance = this;
+        instance.resizeObserver = new ResizeObserver(() => {
+            instance.update();
+        });
+        instance.resizeObserver.observe(instance.container.firstChild);
     },
 
     initWidget() {
@@ -128,6 +136,7 @@ let handyScrollProto = {
     // Remove a scrollbar and all related event handlers
     destroy() {
         let instance = this;
+        instance.resizeObserver.disconnect();
         instance.eventHandlers.forEach(({el, handlers}) => {
             Object.keys(handlers).forEach(event => el.removeEventListener(event, handlers[event], false));
         });

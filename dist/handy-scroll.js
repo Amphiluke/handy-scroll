@@ -57,10 +57,16 @@ https://amphiluke.github.io/handy-scroll/
         instance.container = container;
         instance.visible = true;
         instance.initWidget();
-        instance.update(); // recalculate scrollbar parameters and set its visibility
-
         instance.syncWidget();
         instance.addEventHandlers();
+        instance.initResizeObserver();
+      },
+      initResizeObserver: function initResizeObserver() {
+        var instance = this;
+        instance.resizeObserver = new ResizeObserver(function () {
+          instance.update();
+        });
+        instance.resizeObserver.observe(instance.container.firstChild);
       },
       initWidget: function initWidget() {
         var instance = this;
@@ -183,6 +189,7 @@ https://amphiluke.github.io/handy-scroll/
       // Remove a scrollbar and all related event handlers
       destroy: function destroy() {
         var instance = this;
+        instance.resizeObserver.disconnect();
         instance.eventHandlers.forEach(function (_ref2) {
           var el = _ref2.el,
               handlers = _ref2.handlers;
