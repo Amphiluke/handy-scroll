@@ -1,13 +1,13 @@
 /*!
-handy-scroll v1.0.2
+handy-scroll v1.0.3
 https://amphiluke.github.io/handy-scroll/
-(c) 2018 Amphiluke
+(c) 2019 Amphiluke
 */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    (global.handyScroll = factory());
-}(this, (function () { 'use strict';
+    (global = global || self, global.handyScroll = factory());
+}(this, function () { 'use strict';
 
     var slice = Array.prototype.slice;
     var doc = document;
@@ -271,4 +271,4 @@ https://amphiluke.github.io/handy-scroll/
 
     return handyScroll;
 
-})));
+}));
