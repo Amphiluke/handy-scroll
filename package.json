@@ -19,17 +19,17 @@
   },
   "homepage": "https://amphiluke.github.io/handy-scroll/",
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "babel-preset-minify": "^0.5.0",
     "copyfiles": "^2.1.0",
-    "less": "^3.8.1",
+    "less": "^3.9.0",
     "less-plugin-clean-css": "^1.5.1",
-    "normalize.css": "^8.0.0"
+    "normalize.css": "^8.0.1"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "handy-scroll": "^1.0.2"
+    "@babel/polyfill": "^7.4.4",
+    "handy-scroll": "^1.0.3"
   }
 }

@@ -1,8 +1,8 @@
 (function () {
 
 let doc = document;
-let body = doc.body;
-let handyScroll = window.handyScroll;
+let {body} = doc;
+let {handyScroll} = window;
 
 let dom = {
     $i(id) {
