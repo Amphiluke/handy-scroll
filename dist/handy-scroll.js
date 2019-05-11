@@ -1,13 +1,13 @@
 /*!
-handy-scroll v1.0.2
+handy-scroll v1.0.3
 https://amphiluke.github.io/handy-scroll/
-(c) 2018 Amphiluke
+(c) 2019 Amphiluke
 */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    (global.handyScroll = factory());
-}(this, (function () { 'use strict';
+    (global = global || self, global.handyScroll = factory());
+}(this, function () { 'use strict';
 
     var slice = Array.prototype.slice;
     var doc = document;
@@ -168,13 +168,20 @@ https://amphiluke.github.io/handy-scroll/
         var widget = instance.widget,
             container = instance.container,
             scrollBody = instance.scrollBody;
-        widget.style.width = container.clientWidth + "px";
+        var clientWidth = container.clientWidth,
+            scrollWidth = container.scrollWidth;
+        widget.style.width = clientWidth + "px";
 
         if (!scrollBody) {
           widget.style.left = container.getBoundingClientRect().left + "px";
         }
 
-        widget.firstElementChild.style.width = container.scrollWidth + "px";
+        widget.firstElementChild.style.width = scrollWidth + "px"; // Fit widget height to the native scroll bar height if needed
+
+        if (scrollWidth > clientWidth) {
+          widget.style.height = widget.offsetHeight - widget.clientHeight + 1 + "px"; // +1px JIC
+        }
+
         instance.syncWidget();
         instance.checkVisibility(); // fixes issue Amphiluke/floating-scroll#2
       },
@@ -271,4 +278,4 @@ https://amphiluke.github.io/handy-scroll/
 
     return handyScroll;
 
-})));
+}));

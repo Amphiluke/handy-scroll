@@ -111,11 +111,16 @@ let handyScrollProto = {
     update() {
         let instance = this;
         let {widget, container, scrollBody} = instance;
-        widget.style.width = `${container.clientWidth}px`;
+        let {clientWidth, scrollWidth} = container;
+        widget.style.width = `${clientWidth}px`;
         if (!scrollBody) {
             widget.style.left = `${container.getBoundingClientRect().left}px`;
         }
-        widget.firstElementChild.style.width = `${container.scrollWidth}px`;
+        widget.firstElementChild.style.width = `${scrollWidth}px`;
+        // Fit widget height to the native scroll bar height if needed
+        if (scrollWidth > clientWidth) {
+            widget.style.height = `${widget.offsetHeight - widget.clientHeight + 1}px`; // +1px JIC
+        }
         instance.syncWidget();
         instance.checkVisibility(); // fixes issue Amphiluke/floating-scroll#2
     },
