@@ -7,7 +7,7 @@ https://amphiluke.github.io/handy-scroll/
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     (global = global || self, global.handyScroll = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
     let slice = Array.prototype.slice;
     let doc = document;
@@ -247,4 +247,4 @@ https://amphiluke.github.io/handy-scroll/
 
     return handyScroll;
 
-}));
+})));
