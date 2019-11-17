@@ -1,5 +1,5 @@
 /*!
-handy-scroll v1.0.4
+handy-scroll v1.0.5
 https://amphiluke.github.io/handy-scroll/
 (c) 2019 Amphiluke
 */
@@ -7,7 +7,7 @@ https://amphiluke.github.io/handy-scroll/
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     (global = global || self, global.handyScroll = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
     var slice = Array.prototype.slice;
     var doc = document;
@@ -59,8 +59,9 @@ https://amphiluke.github.io/handy-scroll/
         instance.initWidget();
         instance.update(); // recalculate scrollbar parameters and set its visibility
 
-        instance.syncWidget();
-        instance.addEventHandlers();
+        instance.addEventHandlers(); // Set skipSync flags to their initial values (because update() above calls syncWidget())
+
+        instance.skipSyncContainer = instance.skipSyncWidget = false;
       },
       initWidget: function initWidget() {
         var instance = this;
@@ -87,16 +88,26 @@ https://amphiluke.github.io/handy-scroll/
           el: instance.widget,
           handlers: {
             scroll: function scroll() {
-              if (instance.visible) {
-                instance.syncContainer(true);
-              }
+              if (instance.visible && !instance.skipSyncContainer) {
+                instance.syncContainer();
+              } // Resume widget->container syncing after the widget scrolling has finished
+              // (it might be temporally disabled by the container while syncing the widget)
+
+
+              instance.skipSyncContainer = false;
             }
           }
         }, {
           el: instance.container,
           handlers: {
             scroll: function scroll() {
-              instance.syncWidget(true);
+              if (!instance.skipSyncWidget) {
+                instance.syncWidget();
+              } // Resume container->widget syncing after the container scrolling has finished
+              // (it might be temporally disabled by the widget while syncing the container)
+
+
+              instance.skipSyncWidget = false;
             },
             focusin: function focusin() {
               setTimeout(function () {
@@ -132,35 +143,27 @@ https://amphiluke.github.io/handy-scroll/
           widget.classList.toggle("handy-scroll-hidden");
         }
       },
-      syncContainer: function syncContainer(skipSyncWidget) {
-        if (skipSyncWidget === void 0) {
-          skipSyncWidget = false;
+      syncContainer: function syncContainer() {
+        var instance = this;
+        var scrollLeft = instance.widget.scrollLeft;
+
+        if (instance.container.scrollLeft !== scrollLeft) {
+          // Prevents container’s “scroll” event handler from syncing back again widget scroll position
+          instance.skipSyncWidget = true; // Note that this makes container’s “scroll” event handlers execute
+
+          instance.container.scrollLeft = scrollLeft;
         }
-
-        var instance = this; // Prevents next syncWidget function from changing scroll position
-
-        if (instance.skipSyncContainer === true) {
-          instance.skipSyncContainer = false;
-          return;
-        }
-
-        instance.skipSyncWidget = skipSyncWidget;
-        instance.container.scrollLeft = instance.widget.scrollLeft;
       },
-      syncWidget: function syncWidget(skipSyncContainer) {
-        if (skipSyncContainer === void 0) {
-          skipSyncContainer = false;
+      syncWidget: function syncWidget() {
+        var instance = this;
+        var scrollLeft = instance.container.scrollLeft;
+
+        if (instance.widget.scrollLeft !== scrollLeft) {
+          // Prevents widget’s “scroll” event handler from syncing back again container scroll position
+          instance.skipSyncContainer = true; // Note that this makes widget’s “scroll” event handlers execute
+
+          instance.widget.scrollLeft = scrollLeft;
         }
-
-        var instance = this; // Prevents next syncContainer function from changing scroll position
-
-        if (instance.skipSyncWidget === true) {
-          instance.skipSyncWidget = false;
-          return;
-        }
-
-        instance.skipSyncContainer = skipSyncContainer;
-        instance.widget.scrollLeft = instance.container.scrollLeft;
       },
       // Recalculate scroll width and container boundaries
       update: function update() {
@@ -278,4 +281,4 @@ https://amphiluke.github.io/handy-scroll/
 
     return handyScroll;
 
-}));
+})));
