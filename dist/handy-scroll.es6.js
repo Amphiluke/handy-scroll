@@ -1,7 +1,7 @@
 /*!
 handy-scroll v1.0.2
 https://amphiluke.github.io/handy-scroll/
-(c) 2019 Amphiluke
+(c) 2020 Amphiluke
 */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -144,7 +144,9 @@ https://amphiluke.github.io/handy-scroll/
                 return;
             }
             instance.skipSyncWidget = skipSyncWidget;
-            instance.container.scrollLeft = instance.widget.scrollLeft;
+            if (instance.container && instance.widget) {
+                instance.container.scrollLeft = instance.widget.scrollLeft;
+            }
         },
 
         syncWidget(skipSyncContainer = false) {
@@ -155,7 +157,9 @@ https://amphiluke.github.io/handy-scroll/
                 return;
             }
             instance.skipSyncContainer = skipSyncContainer;
-            instance.widget.scrollLeft = instance.container.scrollLeft;
+            if (instance.widget && instance.container) {
+                instance.widget.scrollLeft = instance.container.scrollLeft;
+            }
         },
 
         // Recalculate scroll width and container boundaries

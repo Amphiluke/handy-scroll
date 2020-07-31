@@ -106,7 +106,9 @@ let handyScrollProto = {
             return;
         }
         instance.skipSyncWidget = skipSyncWidget;
-        instance.container.scrollLeft = instance.widget.scrollLeft;
+        if (instance.container && instance.widget) {
+            instance.container.scrollLeft = instance.widget.scrollLeft;
+        }
     },
 
     syncWidget(skipSyncContainer = false) {
@@ -117,7 +119,9 @@ let handyScrollProto = {
             return;
         }
         instance.skipSyncContainer = skipSyncContainer;
-        instance.widget.scrollLeft = instance.container.scrollLeft;
+        if (instance.widget && instance.container) {
+            instance.widget.scrollLeft = instance.container.scrollLeft;
+        }
     },
 
     // Recalculate scroll width and container boundaries
