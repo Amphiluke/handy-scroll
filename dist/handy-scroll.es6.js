@@ -1,12 +1,12 @@
 /*!
 handy-scroll v1.0.5
 https://amphiluke.github.io/handy-scroll/
-(c) 2020 Amphiluke
+(c) 2021 Amphiluke
 */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, global.handyScroll = factory());
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.handyScroll = factory());
 }(this, (function () { 'use strict';
 
     let slice = Array.prototype.slice;
