@@ -5,6 +5,11 @@
   "main": "dist/handy-scroll.min.js",
   "module": "src/handy-scroll.js",
   "style": "dist/handy-scroll.css",
+  "files": [
+    "dist",
+    "doc",
+    "src"
+  ],
   "scripts": {
     "prepare": "husky install",
     "lint": "eslint src/*.js",
