@@ -1,5 +1,5 @@
 /*!
-handy-scroll v1.0.5
+handy-scroll v1.0.6
 https://amphiluke.github.io/handy-scroll/
 (c) 2021 Amphiluke
 */
@@ -9,12 +9,25 @@ https://amphiluke.github.io/handy-scroll/
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.handyScroll = factory());
 }(this, (function () { 'use strict';
 
-    var slice = Array.prototype.slice;
-    var doc = document;
+    var slice = Array.prototype.slice; // Precaution to avoid reference errors when imported for SSR (issue #13)
+
+    var isDOMAvailable = typeof document === "object" && !!document.documentElement;
     var dom = {
-      doc: doc,
-      html: doc.documentElement,
-      body: doc.body,
+      isDOMAvailable: isDOMAvailable,
+      doc: isDOMAvailable ? document : null,
+      html: isDOMAvailable ? document.documentElement : null,
+      body: isDOMAvailable ? document.body : null,
+      ready: function ready(handler) {
+        if (dom.doc.readyState === "loading") {
+          dom.doc.addEventListener("DOMContentLoaded", function () {
+            return void handler();
+          }, {
+            once: true
+          });
+        } else {
+          handler();
+        }
+      },
       $: function $(ref) {
         if (typeof ref === "string") {
           // ref is a selector
@@ -269,14 +282,10 @@ https://amphiluke.github.io/handy-scroll/
       }
     };
 
-    function autoInit() {
-      handyScroll.mount("[data-handy-scroll]");
-    }
-
-    if (dom.doc.readyState === "loading") {
-      dom.doc.addEventListener("DOMContentLoaded", autoInit, false);
-    } else {
-      autoInit();
+    if (dom.isDOMAvailable) {
+      dom.ready(function () {
+        handyScroll.mount("[data-handy-scroll]");
+      });
     }
 
     return handyScroll;
