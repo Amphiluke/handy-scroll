@@ -1,11 +1,11 @@
 {
   "name": "handy-scroll-site",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Live demos for the handy-scroll project",
   "main": "js/main.js",
   "scripts": {
-    "copyDependencies": "copyfiles -f node_modules/handy-scroll/dist/handy-scroll.min.js node_modules/@babel/polyfill/dist/polyfill.min.js js",
-    "build": "babel js/main.js --out-file js/main.min.js && lessc css/main.less | cleancss --skip-rebase -O2 -o css/main.css",
+    "copyDependencies": "copyfiles -f node_modules/handy-scroll/dist/handy-scroll.min.js js",
+    "build": "babel js/main.js --out-file js/main.min.js && lessc css/main.less | cleancss -c ie9 -O2 -o css/main.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,17 +19,16 @@
   },
   "homepage": "https://amphiluke.github.io/handy-scroll/",
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
     "babel-preset-minify": "^0.5.1",
-    "clean-css-cli": "^4.3.0",
-    "copyfiles": "^2.3.0",
-    "less": "^3.12.2",
+    "clean-css-cli": "^5.3.3",
+    "copyfiles": "^2.4.1",
+    "less": "^4.1.1",
     "normalize.css": "^8.0.1"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.10.4",
-    "handy-scroll": "^1.0.5"
+    "handy-scroll": "^1.0.6"
   }
 }

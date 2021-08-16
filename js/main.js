@@ -86,23 +86,4 @@ dom.$i("is-unobtrusive").addEventListener("change", ({target: {checked}}) => {
 
 handyScroll.mount(".hs-demo");
 
-
-// region IE
-
-if ("ActiveXObject" in window) {
-    // Make IE 11 support 2nd parameter of the `classList.toggle` method
-    let origToggle = DOMTokenList.prototype.toggle;
-    DOMTokenList.prototype.toggle = function (className, force) {
-        if (force === undefined) {
-            return origToggle.call(this, className);
-        }
-        this[force ? "add" : "remove"](className);
-    };
-
-    // Make IE 11 support `matches`
-    Element.prototype.matches = Element.prototype.msMatchesSelector;
-}
-
-// endregion
-
 })();
