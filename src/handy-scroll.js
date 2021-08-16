@@ -64,12 +64,8 @@ let handyScroll = {
 
 export default handyScroll;
 
-function autoInit() {
-    handyScroll.mount("[data-handy-scroll]");
-}
-
-if (dom.doc.readyState === "loading") {
-    dom.doc.addEventListener("DOMContentLoaded", autoInit, false);
-} else {
-    autoInit();
+if (dom.isDOMAvailable) {
+    dom.ready(() => {
+        handyScroll.mount("[data-handy-scroll]");
+    });
 }
