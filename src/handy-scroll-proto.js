@@ -66,7 +66,12 @@ let handyScrollProto = {
                         instance.skipSyncWidget = false;
                     },
                     focusin() {
-                        setTimeout(() => instance.syncWidget(), 0);
+                        setTimeout(() => {
+                            // The widget might be destroyed before the timer is triggered (issue #14)
+                            if (instance.widget) {
+                                instance.syncWidget();
+                            }
+                        }, 0);
                     }
                 }
             }

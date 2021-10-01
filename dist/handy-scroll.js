@@ -1,5 +1,5 @@
 /*!
-handy-scroll v1.0.6
+handy-scroll v1.0.7
 https://amphiluke.github.io/handy-scroll/
 (c) 2021 Amphiluke
 */
@@ -7,7 +7,7 @@ https://amphiluke.github.io/handy-scroll/
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.handyScroll = factory());
-}(this, (function () { 'use strict';
+})(this, (function () { 'use strict';
 
     var slice = Array.prototype.slice; // Precaution to avoid reference errors when imported for SSR (issue #13)
 
@@ -124,7 +124,10 @@ https://amphiluke.github.io/handy-scroll/
             },
             focusin: function focusin() {
               setTimeout(function () {
-                return instance.syncWidget();
+                // The widget might be destroyed before the timer is triggered (issue #14)
+                if (instance.widget) {
+                  instance.syncWidget();
+                }
               }, 0);
             }
           }
@@ -290,4 +293,4 @@ https://amphiluke.github.io/handy-scroll/
 
     return handyScroll;
 
-})));
+}));
