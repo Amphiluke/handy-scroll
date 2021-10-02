@@ -1,4 +1,4 @@
-(function () {
+{
 
 let doc = document;
 let {body} = doc;
@@ -60,12 +60,25 @@ dom.$i("hs-open-popup").addEventListener("click", e => {
         return;
     }
     popupContainer.scrollLeft = popupContainer.scrollWidth;
-    handyScroll.update(popupContainer);
+    let update = () => handyScroll.update(popupContainer);
+    update();
     e.stopPropagation();
+
+    // See css/main.less
+    let mql = window.matchMedia && window.matchMedia("(max-width:719px), (max-height:569px)");
+    if (mql && mql.addEventListener) {
+        mql.addEventListener("change", update);
+    } else {
+        mql = null;
+    }
+
     doc.addEventListener("click", function popupOutClick({target}) {
         if (target.classList.contains("hs-popup-close") || !popup.contains(target)) {
             popup.classList.add("hs-popup-hidden");
             doc.removeEventListener("click", popupOutClick, false);
+            if (mql) {
+                mql.removeEventListener("change", update);
+            }
         }
     }, false);
 }, false);
@@ -86,4 +99,4 @@ dom.$i("is-unobtrusive").addEventListener("change", ({target: {checked}}) => {
 
 handyScroll.mount(".hs-demo");
 
-})();
+}
