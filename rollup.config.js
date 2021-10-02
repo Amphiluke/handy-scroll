@@ -12,32 +12,34 @@ ${pkg.name} v${pkg.version}
 ${pkg.homepage}
 (c) ${new Date().getUTCFullYear()} ${pkg.author}
 */`
-    },
-    plugins: [
-        terser({
-            output: {comments: /^!/}
-        })
-    ]
+    }
+};
+
+let plugins = {
+    terser: terser({
+        output: {comments: /^!/}
+    }),
+    babel: babel()
 };
 
 export default [
     {
         input: config.input,
-        output: Object.assign({file: "dist/handy-scroll.es6.js"}, config.output)
+        output: {...config.output, file: "dist/handy-scroll.es6.js", generatedCode: "es2015"}
     },
     {
         input: config.input,
-        output: Object.assign({file: "dist/handy-scroll.es6.min.js"}, config.output),
-        plugins: config.plugins
+        output: {...config.output, file: "dist/handy-scroll.es6.min.js", generatedCode: "es2015"},
+        plugins: [plugins.terser]
     },
     {
         input: config.input,
-        output: Object.assign({file: "dist/handy-scroll.js"}, config.output),
-        plugins: [babel()]
+        output: {...config.output, file: "dist/handy-scroll.js"},
+        plugins: [plugins.babel]
     },
     {
         input: config.input,
-        output: Object.assign({file: "dist/handy-scroll.min.js"}, config.output),
-        plugins: [babel()].concat(config.plugins)
+        output: {...config.output, file: "dist/handy-scroll.min.js"},
+        plugins: [plugins.babel, plugins.terser]
     }
 ];

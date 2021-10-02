@@ -1,5 +1,5 @@
 /*!
-handy-scroll v1.0.7
+handy-scroll v1.1.0
 https://amphiluke.github.io/handy-scroll/
 (c) 2021 Amphiluke
 */
@@ -219,7 +219,7 @@ https://amphiluke.github.io/handy-scroll/
       }
     };
 
-    var instances = []; // if it were not for IE it would be better to use WeakMap (container -> instance)
+    var instances = []; // if it were not for IE, it would be better to use Map (container -> instance)
 
     var handyScroll = {
       /**
@@ -281,6 +281,20 @@ https://amphiluke.github.io/handy-scroll/
 
             return false;
           });
+        });
+      },
+
+      /**
+       * Destroy handyScroll widgets whose containers are not in the document anymore
+       */
+      destroyDetached: function destroyDetached() {
+        instances = instances.filter(function (instance) {
+          if (!dom.body.contains(instance.container)) {
+            instance.destroy();
+            return false;
+          }
+
+          return true;
         });
       }
     };
