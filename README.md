@@ -30,7 +30,8 @@ The module exports a single object `handyScroll` which provides the following me
 * [`mount`](#mounting-the-widget) — initializes and “mounts” the widgets in the specified containers;
 * [`mounted`](#checking-widget-existence) — checks if the widget is already mounted in the given container;
 * [`update`](#updating-scrollbar) — updates the widget parameters and position;
-* [`destroy`](#destroying-the-widget) — destroys the widgets mounted in the specified containers and removes all related event handlers.
+* [`destroy`](#destroying-the-widget) — destroys the widgets mounted in the specified containers and removes all related event handlers;
+* [`destroyDetached`](#destroying-detached-widgets) — destroys handy-scroll widget instances whose containers were removed from the document.
 
 ### Mounting the widget
 
@@ -69,7 +70,7 @@ console.log(handyScroll.mounted("#spacious-container")); // true
 
 ### Updating scrollbar
 
-If you mount the widget in a container whose size and/or content may dynamically change, then you need a way to update the scrollbar each time the container’s sizes change. This can be done by invoking the method `handyScroll.update()` as in the example below.
+If you mount the widget in a container whose size and/or content may dynamically change, you need a way to update the scrollbar each time the container’s sizes change. This can be done by invoking the method `handyScroll.update()` as in the example below.
 
 ```javascript
 handyScroll.mount(".spacious-container");
@@ -88,6 +89,19 @@ handyScroll.destroy(".spacious-container");
 ```
 
 The method expects a single argument, the target containers reference, which can be either an element, or a list of elements, or a selector.
+
+
+### Destroying detached widgets
+
+If your app completely re-renders a large portion of DOM where handy-scroll widgets were mounted, actual container references are lost, and therefore you cannot unmount the widgets and perform related cleanup using the `destroy` method. In this case, you may just call the `handyScroll.destroyDetached()` method, and the module will find all “zombie” instances and will destroy them for you.
+
+```javascript
+handyScroll.mount(".main-view .spacious-container");
+// ... the app re-renders the main view ...
+document.querySelector(".main-view").innerHTML = "...";
+// destroy handy-scroll widgets whose containers are not in the document anymore
+handyScroll.destroyDetached();
+```
 
 ### Special cases
 
@@ -114,10 +128,6 @@ The [handy-scroll.css](dist/handy-scroll.css) file provides some basic styles fo
 ### “Unobtrusive” mode
 
 You can make the widget more “unobtrusive” so that it will appear only when the mouse pointer hovers over the scrollable container. To do so just apply the class `handy-scroll-hoverable` to the desired scrollable container owning the widget.
-
-## Integration with Angular
-
-If you have problems with the widget integration into your Angular app, please consult [this instruction](doc/angular-integration.md) first.
 
 ## Live demos
 
