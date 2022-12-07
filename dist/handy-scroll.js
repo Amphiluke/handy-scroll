@@ -9,8 +9,9 @@ https://amphiluke.github.io/handy-scroll/
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.handyScroll = factory());
 })(this, (function () { 'use strict';
 
-    var slice = Array.prototype.slice; // Precaution to avoid reference errors when imported for SSR (issue #13)
+    var slice = Array.prototype.slice;
 
+    // Precaution to avoid reference errors when imported for SSR (issue #13)
     var isDOMAvailable = typeof document === "object" && !!document.documentElement;
     var dom = {
       isDOMAvailable: isDOMAvailable,
@@ -33,7 +34,6 @@ https://amphiluke.github.io/handy-scroll/
           // ref is a selector
           return dom.body.querySelector(ref);
         }
-
         return ref; // ref is already an element
       },
       $$: function $$(ref) {
@@ -41,17 +41,14 @@ https://amphiluke.github.io/handy-scroll/
           // ref is an array of elements
           return ref;
         }
-
         if (ref.nodeType === Node.ELEMENT_NODE) {
           // ref is an element
           return [ref];
         }
-
         if (typeof ref === "string") {
           // ref is a selector
           return slice.call(dom.body.querySelectorAll(ref));
         }
-
         return slice.call(ref); // ref is an array-like object (NodeList or HTMLCollection)
       }
     };
@@ -62,18 +59,15 @@ https://amphiluke.github.io/handy-scroll/
         var scrollBodies = dom.$$(".handy-scroll-body").filter(function (node) {
           return node.contains(container);
         });
-
         if (scrollBodies.length) {
           instance.scrollBody = scrollBodies[0];
         }
-
         instance.container = container;
         instance.visible = true;
         instance.initWidget();
         instance.update(); // recalculate scrollbar parameters and set its visibility
-
-        instance.addEventHandlers(); // Set skipSync flags to their initial values (because update() above calls syncWidget())
-
+        instance.addEventHandlers();
+        // Set skipSync flags to their initial values (because update() above calls syncWidget())
         instance.skipSyncContainer = instance.skipSyncWidget = false;
       },
       initWidget: function initWidget() {
@@ -103,10 +97,9 @@ https://amphiluke.github.io/handy-scroll/
             scroll: function scroll() {
               if (instance.visible && !instance.skipSyncContainer) {
                 instance.syncContainer();
-              } // Resume widget->container syncing after the widget scrolling has finished
+              }
+              // Resume widget->container syncing after the widget scrolling has finished
               // (it might be temporally disabled by the container while syncing the widget)
-
-
               instance.skipSyncContainer = false;
             }
           }
@@ -116,10 +109,9 @@ https://amphiluke.github.io/handy-scroll/
             scroll: function scroll() {
               if (!instance.skipSyncWidget) {
                 instance.syncWidget();
-              } // Resume container->widget syncing after the container scrolling has finished
+              }
+              // Resume container->widget syncing after the container scrolling has finished
               // (it might be temporally disabled by the widget while syncing the container)
-
-
               instance.skipSyncWidget = false;
             },
             focusin: function focusin() {
@@ -134,7 +126,7 @@ https://amphiluke.github.io/handy-scroll/
         }];
         eventHandlers.forEach(function (_ref) {
           var el = _ref.el,
-              handlers = _ref.handlers;
+            handlers = _ref.handlers;
           Object.keys(handlers).forEach(function (event) {
             return el.addEventListener(event, handlers[event], false);
           });
@@ -143,41 +135,37 @@ https://amphiluke.github.io/handy-scroll/
       checkVisibility: function checkVisibility() {
         var instance = this;
         var widget = instance.widget,
-            container = instance.container,
-            scrollBody = instance.scrollBody;
+          container = instance.container,
+          scrollBody = instance.scrollBody;
         var mustHide = widget.scrollWidth <= widget.offsetWidth;
-
         if (!mustHide) {
           var containerRect = container.getBoundingClientRect();
           var maxVisibleY = scrollBody ? scrollBody.getBoundingClientRect().bottom : window.innerHeight || dom.html.clientHeight;
           mustHide = containerRect.bottom <= maxVisibleY || containerRect.top > maxVisibleY;
         }
-
         if (instance.visible === mustHide) {
-          instance.visible = !mustHide; // We cannot simply hide the scrollbar since its scrollLeft property will not update in that case
-
+          instance.visible = !mustHide;
+          // We cannot simply hide the scrollbar since its scrollLeft property will not update in that case
           widget.classList.toggle("handy-scroll-hidden");
         }
       },
       syncContainer: function syncContainer() {
         var instance = this;
         var scrollLeft = instance.widget.scrollLeft;
-
         if (instance.container.scrollLeft !== scrollLeft) {
           // Prevents container’s “scroll” event handler from syncing back again widget scroll position
-          instance.skipSyncWidget = true; // Note that this makes container’s “scroll” event handlers execute
-
+          instance.skipSyncWidget = true;
+          // Note that this makes container’s “scroll” event handlers execute
           instance.container.scrollLeft = scrollLeft;
         }
       },
       syncWidget: function syncWidget() {
         var instance = this;
         var scrollLeft = instance.container.scrollLeft;
-
         if (instance.widget.scrollLeft !== scrollLeft) {
           // Prevents widget’s “scroll” event handler from syncing back again container scroll position
-          instance.skipSyncContainer = true; // Note that this makes widget’s “scroll” event handlers execute
-
+          instance.skipSyncContainer = true;
+          // Note that this makes widget’s “scroll” event handlers execute
           instance.widget.scrollLeft = scrollLeft;
         }
       },
@@ -185,18 +173,16 @@ https://amphiluke.github.io/handy-scroll/
       update: function update() {
         var instance = this;
         var widget = instance.widget,
-            container = instance.container,
-            scrollBody = instance.scrollBody;
+          container = instance.container,
+          scrollBody = instance.scrollBody;
         var clientWidth = container.clientWidth,
-            scrollWidth = container.scrollWidth;
+          scrollWidth = container.scrollWidth;
         widget.style.width = clientWidth + "px";
-
         if (!scrollBody) {
           widget.style.left = container.getBoundingClientRect().left + "px";
         }
-
-        widget.firstElementChild.style.width = scrollWidth + "px"; // Fit widget height to the native scroll bar height if needed
-
+        widget.firstElementChild.style.width = scrollWidth + "px";
+        // Fit widget height to the native scroll bar height if needed
         if (scrollWidth > clientWidth) {
           widget.style.height = widget.offsetHeight - widget.clientHeight + 1 + "px"; // +1px JIC
         }
@@ -209,7 +195,7 @@ https://amphiluke.github.io/handy-scroll/
         var instance = this;
         instance.eventHandlers.forEach(function (_ref2) {
           var el = _ref2.el,
-              handlers = _ref2.handlers;
+            handlers = _ref2.handlers;
           Object.keys(handlers).forEach(function (event) {
             return el.removeEventListener(event, handlers[event], false);
           });
@@ -231,13 +217,11 @@ https://amphiluke.github.io/handy-scroll/
           if (handyScroll.mounted(container)) {
             return;
           }
-
           var instance = Object.create(handyScrollProto);
           instances.push(instance);
           instance.init(container);
         });
       },
-
       /**
        * Check if a widget is already mounted in the given container
        * @param {HTMLElement|String} containerRef - Widget container reference (either an element, or a selector)
@@ -249,7 +233,6 @@ https://amphiluke.github.io/handy-scroll/
           return instance.container === container;
         });
       },
-
       /**
        * Update widget parameters and position
        * @param {HTMLElement|NodeList|HTMLCollection|Array|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
@@ -261,12 +244,10 @@ https://amphiluke.github.io/handy-scroll/
               instance.update();
               return true;
             }
-
             return false;
           });
         });
       },
-
       /**
        * Destroy widgets mounted in the given containers
        * @param {HTMLElement|NodeList|HTMLCollection|Array|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
@@ -278,12 +259,10 @@ https://amphiluke.github.io/handy-scroll/
               instances.splice(index, 1)[0].destroy();
               return true;
             }
-
             return false;
           });
         });
       },
-
       /**
        * Destroy handyScroll widgets whose containers are not in the document anymore
        */
@@ -293,12 +272,10 @@ https://amphiluke.github.io/handy-scroll/
             instance.destroy();
             return false;
           }
-
           return true;
         });
       }
     };
-
     if (dom.isDOMAvailable) {
       dom.ready(function () {
         handyScroll.mount("[data-handy-scroll]");
