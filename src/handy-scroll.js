@@ -6,7 +6,7 @@ let instances = []; // if it were not for IE, it would be better to use Map (con
 let handyScroll = {
     /**
      * Mount widgets in the given containers
-     * @param {HTMLElement|NodeList|HTMLCollection|Array|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
+     * @param {HTMLElement|NodeList|HTMLCollection|HTMLElement[]|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
      */
     mount(containerRef) {
         dom.$$(containerRef).forEach(container => {
@@ -31,7 +31,7 @@ let handyScroll = {
 
     /**
      * Update widget parameters and position
-     * @param {HTMLElement|NodeList|HTMLCollection|Array|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
+     * @param {HTMLElement|NodeList|HTMLCollection|HTMLElement[]|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
      */
     update(containerRef) {
         dom.$$(containerRef).forEach(container => {
@@ -47,7 +47,7 @@ let handyScroll = {
 
     /**
      * Destroy widgets mounted in the given containers
-     * @param {HTMLElement|NodeList|HTMLCollection|Array|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
+     * @param {HTMLElement|NodeList|HTMLCollection|HTMLElement[]|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
      */
     destroy(containerRef) {
         dom.$$(containerRef).forEach(container => {

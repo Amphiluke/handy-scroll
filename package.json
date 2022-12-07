@@ -1,10 +1,17 @@
 {
   "name": "handy-scroll",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Handy dependency-free floating scrollbar widget",
-  "main": "dist/handy-scroll.min.js",
-  "module": "src/handy-scroll.js",
-  "style": "dist/handy-scroll.css",
+  "main": "./dist/handy-scroll.min.js",
+  "module": "./src/handy-scroll.js",
+  "style": "./dist/handy-scroll.css",
+  "types": "./dist/handy-scroll.d.ts",
+  "exports": {
+    "types": "./dist/handy-scroll.d.ts",
+    "import": "./src/handy-scroll.js",
+    "require": "./dist/handy-scroll.js"
+  },
+  "type": "module",
   "files": [
     "dist",
     "src"

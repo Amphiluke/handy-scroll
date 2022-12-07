@@ -1,5 +1,5 @@
 /*!
-handy-scroll v1.1.0
+handy-scroll v1.1.1
 https://amphiluke.github.io/handy-scroll/
 (c) 2022 Amphiluke
 */
@@ -205,7 +205,7 @@ https://amphiluke.github.io/handy-scroll/
     let handyScroll = {
         /**
          * Mount widgets in the given containers
-         * @param {HTMLElement|NodeList|HTMLCollection|Array|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
+         * @param {HTMLElement|NodeList|HTMLCollection|HTMLElement[]|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
          */
         mount(containerRef) {
             dom.$$(containerRef).forEach(container => {
@@ -230,7 +230,7 @@ https://amphiluke.github.io/handy-scroll/
 
         /**
          * Update widget parameters and position
-         * @param {HTMLElement|NodeList|HTMLCollection|Array|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
+         * @param {HTMLElement|NodeList|HTMLCollection|HTMLElement[]|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
          */
         update(containerRef) {
             dom.$$(containerRef).forEach(container => {
@@ -246,7 +246,7 @@ https://amphiluke.github.io/handy-scroll/
 
         /**
          * Destroy widgets mounted in the given containers
-         * @param {HTMLElement|NodeList|HTMLCollection|Array|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
+         * @param {HTMLElement|NodeList|HTMLCollection|HTMLElement[]|String} containerRef - Widget container reference (either an element, or a list of elements, or a selector)
          */
         destroy(containerRef) {
             dom.$$(containerRef).forEach(container => {
