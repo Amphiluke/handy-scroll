@@ -7,9 +7,15 @@
   "style": "./dist/handy-scroll.css",
   "types": "./dist/handy-scroll.d.ts",
   "exports": {
-    "types": "./dist/handy-scroll.d.ts",
-    "import": "./src/handy-scroll.js",
-    "require": "./dist/handy-scroll.js"
+    ".": {
+      "types": "./dist/handy-scroll.d.ts",
+      "import": "./src/handy-scroll.js",
+      "require": "./dist/handy-scroll.js"
+    },
+    "./dist/*.css": {
+      "import": "./dist/*.css",
+      "require": "./dist/*.css"
+    }
   },
   "type": "module",
   "files": [
