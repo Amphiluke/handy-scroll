@@ -12,10 +12,7 @@
       "import": "./src/handy-scroll.js",
       "require": "./dist/handy-scroll.js"
     },
-    "./dist/*.css": {
-      "import": "./dist/*.css",
-      "require": "./dist/*.css"
-    }
+    "./dist/*.css": "./dist/*.css"
   },
   "type": "module",
   "files": [
