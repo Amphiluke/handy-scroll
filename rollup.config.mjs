@@ -19,7 +19,7 @@ let plugins = {
     terser: terser({
         output: {comments: /^!/}
     }),
-    babel: babel()
+    babel: babel({babelHelpers: "bundled"})
 };
 
 export default [
