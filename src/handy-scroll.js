@@ -1,5 +1,5 @@
 import dom from "./dom.js";
-import handyScrollProto from "./handy-scroll-proto";
+import handyScrollProto from "./handy-scroll-proto.js";
 
 let instances = []; // if it were not for IE, it would be better to use Map (container -> instance)
 
