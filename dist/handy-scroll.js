@@ -1,5 +1,5 @@
 /*!
-handy-scroll v1.1.2
+handy-scroll v1.1.3
 https://amphiluke.github.io/handy-scroll/
 (c) 2023 Amphiluke
 */
