@@ -19,9 +19,9 @@ let handyScrollProto = {
 
     initWidget() {
         let instance = this;
-        let widget = instance.widget = dom.doc.createElement("div");
+        let widget = instance.widget = dom.doc().createElement("div");
         widget.classList.add("handy-scroll");
-        let strut = dom.doc.createElement("div");
+        let strut = dom.doc().createElement("div");
         strut.style.width = `${instance.container.scrollWidth}px`;
         widget.appendChild(strut);
         instance.container.appendChild(widget);

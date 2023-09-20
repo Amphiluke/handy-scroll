@@ -15,12 +15,18 @@ https://amphiluke.github.io/handy-scroll/
     var isDOMAvailable = typeof document === "object" && !!document.documentElement;
     var dom = {
       isDOMAvailable: isDOMAvailable,
-      doc: isDOMAvailable ? document : null,
-      html: isDOMAvailable ? document.documentElement : null,
-      body: isDOMAvailable ? document.body : null,
+      doc: function doc() {
+        return isDOMAvailable ? document : null;
+      },
+      html: function html() {
+        return isDOMAvailable ? document.documentElement : null;
+      },
+      body: function body() {
+        return isDOMAvailable ? document.body : null;
+      },
       ready: function ready(handler) {
-        if (dom.doc.readyState === "loading") {
-          dom.doc.addEventListener("DOMContentLoaded", function () {
+        if (dom.doc().readyState === "loading") {
+          dom.doc().addEventListener("DOMContentLoaded", function () {
             return void handler();
           }, {
             once: true
@@ -32,7 +38,7 @@ https://amphiluke.github.io/handy-scroll/
       $: function $(ref) {
         if (typeof ref === "string") {
           // ref is a selector
-          return dom.body.querySelector(ref);
+          return dom.body().querySelector(ref);
         }
         return ref; // ref is already an element
       },
@@ -47,7 +53,7 @@ https://amphiluke.github.io/handy-scroll/
         }
         if (typeof ref === "string") {
           // ref is a selector
-          return slice.call(dom.body.querySelectorAll(ref));
+          return slice.call(dom.body().querySelectorAll(ref));
         }
         return slice.call(ref); // ref is an array-like object (NodeList or HTMLCollection)
       }
@@ -72,9 +78,9 @@ https://amphiluke.github.io/handy-scroll/
       },
       initWidget: function initWidget() {
         var instance = this;
-        var widget = instance.widget = dom.doc.createElement("div");
+        var widget = instance.widget = dom.doc().createElement("div");
         widget.classList.add("handy-scroll");
-        var strut = dom.doc.createElement("div");
+        var strut = dom.doc().createElement("div");
         strut.style.width = instance.container.scrollWidth + "px";
         widget.appendChild(strut);
         instance.container.appendChild(widget);
@@ -271,7 +277,7 @@ https://amphiluke.github.io/handy-scroll/
        */
       destroyDetached: function destroyDetached() {
         instances = instances.filter(function (instance) {
-          if (!dom.body.contains(instance.container)) {
+          if (!dom.body().contains(instance.container)) {
             instance.destroy();
             return false;
           }
