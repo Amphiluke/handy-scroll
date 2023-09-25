@@ -148,9 +148,6 @@ https://amphiluke.github.io/handy-scroll/
           var containerRect = container.getBoundingClientRect();
           var maxVisibleY = scrollBody ? scrollBody.getBoundingClientRect().bottom : window.innerHeight || dom.html.clientHeight;
           mustHide = containerRect.bottom <= maxVisibleY || containerRect.top > maxVisibleY;
-          if (scrollBody) {
-            widget.style.bottom = "calc(100% - " + scrollBody.getBoundingClientRect().bottom + "px";
-          }
         }
         if (instance.visible === mustHide) {
           instance.visible = !mustHide;
