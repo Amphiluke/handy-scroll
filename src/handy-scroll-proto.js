@@ -19,9 +19,9 @@ let handyScrollProto = {
 
     initWidget() {
         let instance = this;
-        let widget = instance.widget = dom.doc().createElement("div");
+        let widget = instance.widget = document.createElement("div");
         widget.classList.add("handy-scroll");
-        let strut = dom.doc().createElement("div");
+        let strut = document.createElement("div");
         strut.style.width = `${instance.container.scrollWidth}px`;
         widget.appendChild(strut);
         instance.container.appendChild(widget);
@@ -89,7 +89,7 @@ let handyScrollProto = {
             let containerRect = container.getBoundingClientRect();
             let maxVisibleY = scrollBody ?
                 scrollBody.getBoundingClientRect().bottom :
-                window.innerHeight || dom.html.clientHeight;
+                window.innerHeight || document.documentElement.clientHeight;
             mustHide = ((containerRect.bottom <= maxVisibleY) || (containerRect.top > maxVisibleY));
         }
         if (instance.visible === mustHide) {

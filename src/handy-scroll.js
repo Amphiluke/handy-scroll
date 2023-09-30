@@ -66,7 +66,7 @@ let handyScroll = {
      */
     destroyDetached() {
         instances = instances.filter(instance => {
-            if (!dom.body().contains(instance.container)) {
+            if (!document.body.contains(instance.container)) {
                 instance.destroy();
                 return false;
             }
