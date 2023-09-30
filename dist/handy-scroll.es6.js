@@ -11,19 +11,13 @@ https://amphiluke.github.io/handy-scroll/
 
     let slice = Array.prototype.slice;
 
-    // Precaution to avoid reference errors when imported for SSR (issue #13)
-    let isDOMAvailable = typeof document === "object" && !!document.documentElement;
-
     let dom = {
-        isDOMAvailable,
-
-        doc: isDOMAvailable ? document : null,
-        html: isDOMAvailable ? document.documentElement : null,
-        body: isDOMAvailable ? document.body : null,
+        // Precaution to avoid reference errors when imported for SSR (issue #13)
+        isDOMAvailable: typeof document === "object" && !!document.documentElement,
 
         ready(handler) {
-            if (dom.doc.readyState === "loading") {
-                dom.doc.addEventListener("DOMContentLoaded", () => void handler(), {once: true});
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", () => void handler(), {once: true});
             } else {
                 handler();
             }
@@ -31,7 +25,7 @@ https://amphiluke.github.io/handy-scroll/
 
         $(ref) {
             if (typeof ref === "string") { // ref is a selector
-                return dom.body.querySelector(ref);
+                return document.body.querySelector(ref);
             }
             return ref; // ref is already an element
         },
@@ -44,7 +38,7 @@ https://amphiluke.github.io/handy-scroll/
                 return [ref];
             }
             if (typeof ref === "string") { // ref is a selector
-                return slice.call(dom.body.querySelectorAll(ref));
+                return slice.call(document.body.querySelectorAll(ref));
             }
             return slice.call(ref); // ref is an array-like object (NodeList or HTMLCollection)
         }
@@ -69,9 +63,9 @@ https://amphiluke.github.io/handy-scroll/
 
         initWidget() {
             let instance = this;
-            let widget = instance.widget = dom.doc.createElement("div");
+            let widget = instance.widget = document.createElement("div");
             widget.classList.add("handy-scroll");
-            let strut = dom.doc.createElement("div");
+            let strut = document.createElement("div");
             strut.style.width = `${instance.container.scrollWidth}px`;
             widget.appendChild(strut);
             instance.container.appendChild(widget);
@@ -139,7 +133,7 @@ https://amphiluke.github.io/handy-scroll/
                 let containerRect = container.getBoundingClientRect();
                 let maxVisibleY = scrollBody ?
                     scrollBody.getBoundingClientRect().bottom :
-                    window.innerHeight || dom.html.clientHeight;
+                    window.innerHeight || document.documentElement.clientHeight;
                 mustHide = ((containerRect.bottom <= maxVisibleY) || (containerRect.top > maxVisibleY));
             }
             if (instance.visible === mustHide) {
@@ -265,7 +259,7 @@ https://amphiluke.github.io/handy-scroll/
          */
         destroyDetached() {
             instances = instances.filter(instance => {
-                if (!dom.body.contains(instance.container)) {
+                if (!document.body.contains(instance.container)) {
                     instance.destroy();
                     return false;
                 }
