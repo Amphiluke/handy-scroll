@@ -1,7 +1,7 @@
 /*!
 handy-scroll v1.1.4
 https://amphiluke.github.io/handy-scroll/
-(c) 2023 Amphiluke
+(c) 2024 Amphiluke
 */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :

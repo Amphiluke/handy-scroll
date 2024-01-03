@@ -1,7 +1,7 @@
 /*!
 handy-scroll v1.1.4
 https://amphiluke.github.io/handy-scroll/
-(c) 2023 Amphiluke
+(c) 2024 Amphiluke
 */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -181,7 +181,6 @@ https://amphiluke.github.io/handy-scroll/
         if (scrollWidth > clientWidth) {
           widget.style.height = widget.offsetHeight - widget.clientHeight + 1 + "px"; // +1px JIC
         }
-
         instance.syncWidget();
         instance.checkVisibility(); // fixes issue Amphiluke/floating-scroll#2
       },
