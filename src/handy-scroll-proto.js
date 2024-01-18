@@ -145,7 +145,7 @@ let handyScrollProto = {
         instance.eventHandlers.forEach(({el, handlers}) => {
             Object.keys(handlers).forEach(event => el.removeEventListener(event, handlers[event], false));
         });
-        instance.widget.parentNode.removeChild(instance.widget);
+        instance.widget.remove();
         instance.eventHandlers = instance.widget = instance.container = instance.scrollBody = null;
     }
 };
