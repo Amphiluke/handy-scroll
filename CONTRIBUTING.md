@@ -2,7 +2,7 @@
 
 ## Reporting an issue
 
-If you have found a bug please feel free to report an issue after ensuring that no such bug has been reported yet (check [existing issues](https://github.com/Amphiluke/handy-scroll/issues) first). Be sure to write a clear description of the problem. It will be great if you also provide a minimum example revealing the bug. You may use such services as [CodePen](https://codepen.io/) or [JSFiddle](https://jsfiddle.net/) and [unpkg](https://unpkg.com/) to assemble a live demo for the issue you’ve found.
+If you have found a bug, please feel free to report an issue after ensuring that no such bug has been reported yet (check [existing issues](https://github.com/Amphiluke/handy-scroll/issues) first). Be sure to write a clear description of the problem. It will be great if you also provide a minimum example revealing the bug. You may use such services as [CodePen](https://codepen.io/) or [JSFiddle](https://jsfiddle.net/) and [unpkg](https://unpkg.com/) to assemble a live demo for the issue you’ve found.
 
 ## Making changes in code and opening a pull request
 

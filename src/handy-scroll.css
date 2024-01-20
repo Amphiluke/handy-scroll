@@ -1,0 +1,55 @@
+.handy-scroll {
+    bottom: 0;
+    min-height: 17px; /* based on https://codepen.io/sambible/post/browser-scrollbar-widths (fixes #3) */
+    overflow: auto;
+    position: fixed;
+}
+
+.handy-scroll div {
+    height: 1px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.handy-scroll div::before {
+    content: "\A0"; /* fixes Amphiluke/floating-scroll#6 */
+}
+
+.handy-scroll,
+.handy-scroll div {
+    font-size: 1px;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.handy-scroll-hidden {
+    bottom: 9999px;
+}
+
+.handy-scroll-hidden div::before {
+    content: "\A0\A0"; /* changing content fixes eventual bug with widget re-rendering in Chrome */
+}
+
+.handy-scroll-viewport {
+    /* It can be any type of positioning except static. Redefine in your CSS as needed */
+    position: relative;
+}
+
+.handy-scroll-body {
+    overflow: auto;
+}
+    
+.handy-scroll-viewport .handy-scroll {
+    left: 0;
+    position: absolute;
+}
+
+.handy-scroll-hoverable .handy-scroll {
+    opacity: 0;
+    transition: opacity 0.5s ease 0.3s;
+}
+
+.handy-scroll-hoverable:hover .handy-scroll {
+    opacity: 1;
+}
