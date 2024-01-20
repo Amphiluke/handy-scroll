@@ -79,7 +79,7 @@ header {
     p {
         font-size:0.85em;
         margin:0;
-        &:before {
+        &::before {
             content:"📜";
             display:block;
             font-size:3em;
@@ -136,11 +136,11 @@ main {
         cursor:pointer;
         flex-shrink:0;
         padding-left:1em;
-        &:before {
+        &::before {
             color:#b00;
             content:"Disable";
         }
-        &.disabled:before {
+        &.disabled::before {
             color:#070;
             content:"Enable";
         }
@@ -214,10 +214,11 @@ main {
 }
 
 #is-unobtrusive {
-    ~ b:after {
+    accent-color: lighten(@text-color, 10%);
+    ~ b::after {
         content:"off";
     }
-    &:checked ~ b:after {
+    &:checked ~ b::after {
         content:"on";
     }
 }
