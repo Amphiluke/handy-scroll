@@ -20,7 +20,7 @@
     "src"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "lint": "eslint",
     "build": "rollup -c && cleancss -O2 -o dist/handy-scroll.css src/handy-scroll.css"
   },
