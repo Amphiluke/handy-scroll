@@ -19,7 +19,7 @@ The widget requires the CSS file [handy-scroll.css](dist/handy-scroll.css) to be
 The handy-scroll package is available on npm, so you may add it to your project as usual:
 
 ```
-npm install handy-scroll
+npm install handy-scroll@1
 ```
 
 ## Details & API
