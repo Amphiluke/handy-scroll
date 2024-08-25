@@ -57,11 +57,19 @@ Standard use case above implies that handy-scroll will stick to the bottom of th
 
 ### `HandyScroll.prototype.update()`
 
-handy-scroll automatically tracks changes of the viewport width in order to keep the component’s size, position and visibility in sync with the owner’s metrics. However there can be some cases when you’ll need to trigger the component update programmatically (e.g. after some changes in DOM). To do so, just call the method `update()` on the specific `<handy-scroll>` element:
+handy-scroll automatically tracks viewport changes in order to keep the component’s size, position and visibility in sync with the owner’s metrics. However there can be some cases when you’ll need to trigger the component update programmatically (e.g. after some changes in DOM). To do so, just call the method `update()` on the specific `<handy-scroll>` element:
 
 ```javascript
 document.getElementById("my-handy-scroll").update();
 ```
+
+### `HandyScroll.prototype.owner`
+
+Reflects the value of the `owner` attribute, which in turn should reference the `id` attribute of the horizontally-scrollable container (owner).
+
+### `HandyScroll.prototype.viewport`
+
+Reflects the value of the `viewport` attribute, which (if present) should reference the `id` attribute of the element serving as custom viewport.
 
 ## Live demos
 
