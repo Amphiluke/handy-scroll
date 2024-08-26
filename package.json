@@ -16,7 +16,6 @@
     "src"
   ],
   "scripts": {
-    "prepare": "husky",
     "lint": "eslint",
     "dev": "vite",
     "build": "vite build",
@@ -42,7 +41,6 @@
     "@stylistic/eslint-plugin-js": "^2.6.4",
     "eslint": "^9.9.1",
     "globals": "^15.9.0",
-    "husky": "^9.1.5",
     "vite": "^5.4.2"
   }
 }
