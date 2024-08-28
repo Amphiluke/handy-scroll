@@ -1,9 +1,9 @@
 declare class HandyScroll extends HTMLElement {
   #private;
   static get observedAttributes(): string[];
-  get owner(): string;
+  get owner(): string | null;
   set owner(ownerId: string);
-  get viewport(): string;
+  get viewport(): string | null;
   set viewport(viewportId: string);
   constructor();
   connectedCallback(): void;
