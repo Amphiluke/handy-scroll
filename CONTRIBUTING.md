@@ -6,7 +6,7 @@ If you have found a bug, please feel free to report an issue after ensuring that
 
 ## Making changes in code and opening a pull request
 
-If you know the way to fix some bug or just to make the widget better, you are welcome to open a pull request. Please provide a clear and detailed description of what do your changes fix or improve, or refer an existing issue containing such an explanation.
+If you know the way to fix some bug or just to make the component better, you are welcome to open a pull request. Please provide a clear and detailed description of what do your changes fix or improve, or refer an existing issue containing such an explanation.
 
 Before submitting a new pull request be sure to do the following things.
 

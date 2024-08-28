@@ -8,8 +8,7 @@
       "import": "./dist/handy-scroll.mjs"
     }
   },
-  "browser": "./dist/handy-scroll.mjs",
-  "unpkg": "./dist/handy-scroll.mjs",
+  "main": "./dist/handy-scroll.mjs",
   "type": "module",
   "files": [
     "dist",
