@@ -1,12 +1,10 @@
 {
-  "name": "handy-scroll-site",
+  "name": "handy-scroll-page",
   "version": "2.0.0",
+  "private": true,
   "description": "Live demos for the handy-scroll project",
-  "main": "js/main.js",
   "scripts": {
-    "copyDependencies": "copyfiles -f node_modules/handy-scroll/dist/handy-scroll.es6.min.js js",
-    "build": "terser js/main.js -c -m -o js/main.min.js && lessc css/main.less | cleancss -c ie9 -O2 -o css/main.css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-css": "lightningcss --minify --bundle ./css/main.css -o ./css/main.min.css"
   },
   "repository": {
     "type": "git",
@@ -19,13 +17,7 @@
   },
   "homepage": "https://amphiluke.github.io/handy-scroll/",
   "devDependencies": {
-    "clean-css-cli": "^5.6.3",
-    "copyfiles": "^2.4.1",
-    "less": "^4.2.0",
-    "normalize.css": "^8.0.1",
-    "terser": "^5.27.0"
-  },
-  "dependencies": {
-    "handy-scroll": "^1.1.5"
+    "lightningcss-cli": "^1.26.0",
+    "normalize.css": "^8.0.1"
   }
 }

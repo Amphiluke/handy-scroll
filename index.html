@@ -1,175 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>handy-scroll</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/main.css?v1.1.5">
-    <meta name="description" content="Handy dependency-free floating scrollbar widget">
-    <meta property="og:url" content="https://amphiluke.github.io/handy-scroll">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="handy-scroll">
-    <meta property="og:image" content="https://amphiluke.github.io/handy-scroll/img/preview.jpg">
-    <meta property="og:description" content="Handy dependency-free floating scrollbar widget">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>handy-scroll</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <script>
+    if (!window.CustomStateSet) location.replace("./v1/");
+  </script>
+  <link rel="stylesheet" href="css/main.min.css?v2.0.0">
+  <meta name="description" content="Handy dependency-free floating scrollbar web component">
+  <meta property="og:url" content="https://amphiluke.github.io/handy-scroll">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="handy-scroll">
+  <meta property="og:image" content="https://amphiluke.github.io/handy-scroll/img/preview.jpg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="670">
+  <meta property="og:description" content="Handy dependency-free floating scrollbar web component">
 </head>
 <body>
-    <header>
-        <h1>handy-scroll</h1>
-        <p>Handy dependency-free floating scrollbar widget</p>
-    </header>
+  <header>
+    <h1>handy-scroll</h1>
+    <p>Handy dependency-free floating scrollbar web component</p>
+  </header>
 
-    <main>
-        <section>
-            <h2>Introductory remarks</h2>
-            <p>This web page contains a few examples of use of the <a href="https://github.com/Amphiluke/handy-scroll"><code>handy-scroll</code></a> widget. <code>handy-scroll</code> is a dependency-free module which can be used to solve the problem of scrolling some lengthy containers horizontally when those containers don’t fit into the viewport. The widget is just a scrollbar which is attached at the bottom of the container’s visible area. It doesn’t get out of sight when the page is scrolled, thereby making horizontal scrolling of the container much handier.</p>
-            <p>If you are looking for a guide on the module usage and API, please check out this <a href="https://github.com/Amphiluke/handy-scroll#handy-scroll">README</a> on GitHub.</p>
-        </section>
+  <main>
+    <section>
+      <h2>Introductory remarks</h2>
+      <p>This web page contains a few examples of use of the <a href="https://github.com/Amphiluke/handy-scroll"><code>handy-scroll</code></a> web component. <code>handy-scroll</code> is a dependency-free web component which can be used to solve the problem of scrolling lengthy containers horizontally when those containers don’t fit into the viewport. The component is just a scrollbar which is attached at the bottom of the container’s visible area. It doesn’t get out of sight when the page is scrolled, thereby making horizontal scrolling of the container much handier.</p>
+      <p>If you are looking for a guide on the component usage and API, please check out this <a href="https://github.com/Amphiluke/handy-scroll#handy-scroll">README</a> on GitHub.</p>
+    </section>
 
-        <section id="demo-handscrolls">
-            <h2>#1: Handscrolls</h2>
+    <section id="demo-handscrolls">
+      <h2>#1: Handscrolls</h2>
 
-            <h3>Description</h3>
-            <p>Using of the <code>handy-scroll</code> widget can be appropriate for an online exhibiting of large <a href="https://en.wikipedia.org/wiki/Handscroll" rel="nofollow noopener" target="_blank">handscrolls</a>.</p>
-            <p>The demo below shows some use cases for the API methods <a href="https://github.com/Amphiluke/handy-scroll#updating-scrollbar"><code>update</code></a>, <a href="https://github.com/Amphiluke/handy-scroll#destroying-the-widget"><code>destroy</code></a>, and <a href="https://github.com/Amphiluke/handy-scroll#checking-widget-existence"><code>mounted</code></a>. Click the “tabs” to switch over the paintings, and the widget parameters will update accordingly (note that handscrolls are viewed starting from the right end). Click “Disable/Enable” to destroy/remount the widget.</p>
+      <h3>Description</h3>
+      <p>Using of the <code>handy-scroll</code> web component can be appropriate for online exhibiting of large <a href="https://en.wikipedia.org/wiki/Handscroll" rel="nofollow noopener" target="_blank">handscrolls</a>.</p>
+      <p>The demo below shows a use case for the API method <a href="https://github.com/Amphiluke/handy-scroll#handyscrollprototypeupdate"><code>update()</code></a>. Click the “tabs” to switch over the paintings, and the component parameters will update accordingly (note that handscrolls are viewed starting from the right end).</p>
 
-            <h3>Live demo</h3>
-            <div>
-                <div class="handscrolls-ctrl">
-                    <div class="handscrolls-nav" id="handscrolls-nav">
-                        <span class="active">Qingming Shanghe Tu</span> &#x2502;
-                        <span>Nine Dragons</span> &#x2502;
-                        <span>Kangxi Emperor’s Southern Inspection Tour</span>
-                    </div>
-                    <div class="handscrolls-toggle" id="handscrolls-toggle"></div>
-                </div>
-                <div class="hs-demo handscrolls" id="handscrolls">
-                    <img src="img/along-the-river.jpg" alt="“Along the River During the Qingming Festival” by Zhang Zeduan" width="10561" height="1000" class="active">
-                    <img src="img/nine-dragons.jpg" alt="“Nine Dragons” by Chen Rong" width="19039" height="964">
-                    <img src="img/emperor-tour.jpg" alt="“Kangxi Emperor’s Southern Inspection Tour” by Wang Hui" width="3001" height="1396">
-                </div>
-            </div>
+      <h3>Live demo</h3>
+      <div class="demo-handscrolls">
+        <form action="#" autocomplete="off" class="handscrolls-nav" id="handscrolls-nav">
+          <label><input type="radio" name="handscroll" value="1" checked>Qingming Shanghe Tu</label> &#x2502;
+          <label><input type="radio" name="handscroll" value="2">Nine Dragons</label> &#x2502;
+          <label><input type="radio" name="handscroll" value="3">Kangxi Emperor’s Southern Inspection Tour</label>
+        </form>
+        <div class="handscrolls" id="handscrolls">
+          <img src="img/along-the-river.jpg" alt="“Along the River During the Qingming Festival” by Zhang Zeduan" width="10561" height="1000" class="active">
+          <img src="img/nine-dragons.jpg" alt="“Nine Dragons” by Chen Rong" width="19039" height="964">
+          <img src="img/emperor-tour.jpg" alt="“Kangxi Emperor’s Southern Inspection Tour” by Wang Hui" width="3001" height="1396">
+        </div>
+        <handy-scroll owner="handscrolls"></handy-scroll>
+      </div>
 
-            <h3>Demo’s code</h3>
-            <pre class="hs-code">let handscrollsContainer = document.getElementById("handscrolls");
-let handscrolls = handscrollsContainer.getElementsByTagName("img");
-handscrollsContainer.scrollLeft = handscrollsContainer.scrollWidth;
+      <h3>Demo’s code</h3>
+      <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="js" data-slug-hash="bGPxzBy" data-pen-title="handy-scroll: demo #1" data-user="amphiluke" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+        <span>See the Pen <a href="https://codepen.io/amphiluke/pen/bGPxzBy">handy-scroll: demo #1</a> by Amphiluke (<a href="https://codepen.io/amphiluke">@amphiluke</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+      </p>
+    </section>
 
-<span class="hs-highlight">// Widget initialization
-handyScroll.mount(handscrollsContainer);</span>
+    <section id="demo-popup">
+      <h2>#2: handy-scroll in a popup</h2>
 
-document.getElementById("handscrolls-nav").addEventListener("click", ({target}) => {
-    if (target.matches("span:not(.active)")) {
-        Array.from(target.parentNode.children).forEach((span, index) => {
-            let isActive = span === target;
-            span.classList.toggle("active", isActive);
-            handscrolls[index].classList.toggle("active", isActive);
-        });
-        handscrollsContainer.scrollLeft = handscrollsContainer.scrollWidth;
-        <span class="hs-highlight">// Force widget update programmatically</span>
-        <span class="hs-highlight">handyScroll.update(handscrollsContainer);</span>
-    }
-});
+      <h3>Description</h3>
+      <p>This example demonstrates a special use case — a component inside a positioned popup serving as a custom viewport element. Please find out the details of this use case in the <a href="https://github.com/Amphiluke/handy-scroll#custom-viewport-element">component’s docs</a>.</p>
 
-document.getElementById("handscrolls-toggle").addEventListener("click", ({target}) => {
-    <span class="hs-highlight">// Checking whether the widget is mounted or not</span>
-    <span class="hs-highlight">let mounted = handyScroll.mounted(handscrollsContainer);</span>
-    target.classList.toggle("disabled", mounted);
-    <span class="hs-highlight">// Unmount/remount the widget</span>
-    <span class="hs-highlight">handyScroll[mounted ? "destroy" : "mount"](handscrollsContainer);</span>
-});</pre>
-        </section>
+      <h3>Live demo</h3>
+      <p><span id="hs-open-popup">Click here to open a popup</span></p>
+      <dialog id="hs-popup" class="hs-popup">
+        <div class="hs-viewport" id="hs-viewport">
+          <button type="button" id="hs-popup-close" class="hs-popup-close"></button>
+          <h4>“Along the River During the Qingming Festival”</h4>
+          <div id="qingming-fest" class="hs-qingming">
+            <img src="img/along-the-river.jpg" alt="“Along the River During the Qingming Festival” by Zhang Zeduan" width="10561" height="1000">
+          </div>
+          <p class="small"><a href="https://en.wikipedia.org/wiki/Along_the_River_During_the_Qingming_Festival" rel="nofollow noopener" target="_blank"><em>“Along the River During the Qingming Festival”</em></a> (fragment), painting by Zhang Zeduan (12th century)</p>
+        </div>
+        <handy-scroll owner="qingming-fest" viewport="hs-viewport"></handy-scroll>
+      </dialog>
 
-        <section id="demo-popup">
-            <h2>#2: handy-scroll widget in a popup</h2>
+      <h3>Demo’s code</h3>
+      <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="js" data-slug-hash="QWXVYeE" data-pen-title="handy-scroll: demo #2" data-user="amphiluke" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+        <span>See the Pen <a href="https://codepen.io/amphiluke/pen/QWXVYeE">
+        handy-scroll: demo #2</a> by Amphiluke (<a href="https://codepen.io/amphiluke">@amphiluke</a>)
+        on <a href="https://codepen.io">CodePen</a>.</span>
+      </p>
+    </section>
+  </main>
 
-            <h3>Description</h3>
-            <p>This example demonstrates a special use case — a widget inside a positioned popup. Please find out the details of this use case in the <a href="https://github.com/Amphiluke/handy-scroll#special-cases">module’s docs</a>.</p>
+  <footer>
+    <aside>
+      <p>The following artworks were used in this web page’s design and content:</p>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/File:Alongtheriver_QingMing.jpg" rel="nofollow noopener" target="_blank">Along the River During the Qingming Festival</a> by Zhang Zeduan</li>
+        <li><a href="https://en.wikipedia.org/wiki/File:Chen_Rong_-_Nine_Dragons.jpg" rel="nofollow noopener" target="_blank">Nine Dragons</a> by Chen Rong</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:%E6%B8%85_%E7%8E%8B%E7%BF%AC_%E7%AD%89_%E5%BA%B7%E7%86%99%E5%8D%97%E5%B7%A1%E5%9C%96_%EF%BC%88%E5%8D%B7%E4%B8%89-_%E6%BF%9F%E5%8D%97%E8%87%B3%E6%B3%B0%E5%B1%B1%EF%BC%89_%E5%8D%B7-The_Kangxi_Emperor%27s_Southern_Inspection_Tour,_Scroll_Three-_Ji%27nan_to_Mount_Tai_MET_DP105295.jpg" rel="nofollow noopener" target="_blank">The Kangxi Emperor’s Southern Inspection Tour</a> by Wang Hui</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:%E5%85%83_%E8%B6%99%E5%AD%9F%E9%A0%AB_%E9%9B%99%E6%9D%BE%E5%B9%B3%E9%81%A0%E5%9C%96_%E5%8D%B7-Twin_Pines,_Level_Distance_MET_DP153682.jpg" rel="nofollow noopener" target="_blank">Twin Pines, Level Distance</a> by Zhao Mengfu</li>
+      </ul>
+    </aside>
+    <p>
+      © 2024 Amphiluke<br>
+      <a href="https://github.com/Amphiluke/handy-scroll">handy-scroll on GitHub</a>
+    </p>
+  </footer>
 
-            <h3>Live demo</h3>
-            <p><span id="hs-open-popup">Click here to open a popup</span></p>
-            <div id="hs-popup" class="hs-popup hs-popup-hidden handy-scroll-viewport">
-                <div class="handy-scroll-body">
-                    <span class="hs-popup-close"></span>
-                    <h4>“Along the River During the Qingming Festival”</h4>
-                    <div id="qingming-fest" class="hs-demo hs-qingming">
-                        <img src="img/along-the-river.jpg" alt="“Along the River During the Qingming Festival” by Zhang Zeduan" width="10561" height="1000">
-                    </div>
-                    <p class="small"><a href="https://en.wikipedia.org/wiki/Along_the_River_During_the_Qingming_Festival" rel="nofollow noopener" target="_blank"><em>“Along the River During the Qingming Festival”</em></a> (fragment), painting by Zhang Zeduan (12th century)</p>
-                </div>
-            </div>
-
-            <h3>Demo’s code (key parts)</h3>
-            <h4>HTML:</h4>
-            <pre class="hs-code"><span class="hs-highlight">&lt;!-- Apply the "handy-scroll-viewport" class to the popup block --&gt;</span>
-&lt;div class="hs-popup hs-popup-hidden <span class="hs-highlight">handy-scroll-viewport</span>"&gt;
-    <span class="hs-highlight">&lt;!-- Apply the "handy-scroll-body" class to the popup contents block --&gt;</span>
-    &lt;div class="<span class="hs-highlight">handy-scroll-body</span>"&gt;
-        <span class="hs-highlight">&lt;!-- Horizontally scrollable container --&gt;</span>
-        &lt;div id="qingming-fest" class="hs-demo hs-qingming"&gt;
-            <span class="hs-highlight">&lt;!-- Horizontally wide contents --&gt;</span>
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</pre>
-            <h4>CSS:</h4>
-            <pre class="hs-code">.hs-popup {
-    <span class="hs-highlight">height:550px;</span>
-    <span class="hs-highlight">padding:10px;</span>
-    <span class="hs-highlight">position:fixed; /* must be positioned (relative is the default) */</span>
-    /* other styles */
-}
-.hs-popup <span class="hs-highlight">.handy-scroll-body</span> {
-    <span class="hs-highlight">height:550px; /* same as for parent (the latter should not be scrollable) */</span>
-    width:100%;
-}
-.hs-popup <span class="hs-highlight">.handy-scroll:not(.handy-scroll-hidden)</span> {
-    <span class="hs-highlight">bottom:10px; /* same value as the parent’s bottom padding */</span>
-    <span class="hs-highlight">left:10px; /* same value as the parent’s left padding */</span>
-}</pre>
-            <h4>JavaScript:</h4>
-            <pre class="hs-code"><span class="hs-highlight">// Widget initialization
-handyScroll.mount("#qingming-fest");</span>
-document.getElementById("hs-open-popup").addEventListener("click", e => {
-    // Show the popup
-    let popup = document.getElementById("hs-popup");
-    popup.classList.toggle("hs-popup-hidden");
-    // ...
-    <span class="hs-highlight">// You may need to force scrollbar update when the popup becomes visible</span>
-    <span class="hs-highlight">handyScroll.update("#qingming-fest");</span>
-});</pre>
-        </section>
-
-        <section id="demo-unobtrusive">
-            <h2>#3 “Unobtrusive” mode</h2>
-
-            <h3>Description</h3>
-            <p>This feature makes handy-scroll widgets appear only when the mouse pointer hovers over the scrollable container. Refer the <a href="https://github.com/Amphiluke/handy-scroll#unobtrusive-mode">module’s docs</a> for more details.</p>
-
-            <h3>Live demo</h3>
-            <form action="#" autocomplete="off">
-                <label><input type="checkbox" id="is-unobtrusive"> Unobtrusive mode <b></b></label><br>
-                <span class="small">Check/uncheck this checkbox to toggle the “unobtrusive” mode for all widget instances on this page</span>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <aside>
-            <p>The following artworks were used in this web page’s design and content:</p>
-            <ul>
-                <li><a href="https://en.wikipedia.org/wiki/File:Alongtheriver_QingMing.jpg" rel="nofollow noopener" target="_blank">Along the River During the Qingming Festival</a> by Zhang Zeduan</li>
-                <li><a href="https://en.wikipedia.org/wiki/File:Chen_Rong_-_Nine_Dragons.jpg" rel="nofollow noopener" target="_blank">Nine Dragons</a> by Chen Rong</li>
-                <li><a href="https://commons.wikimedia.org/wiki/File:%E6%B8%85_%E7%8E%8B%E7%BF%AC_%E7%AD%89_%E5%BA%B7%E7%86%99%E5%8D%97%E5%B7%A1%E5%9C%96_%EF%BC%88%E5%8D%B7%E4%B8%89-_%E6%BF%9F%E5%8D%97%E8%87%B3%E6%B3%B0%E5%B1%B1%EF%BC%89_%E5%8D%B7-The_Kangxi_Emperor%27s_Southern_Inspection_Tour,_Scroll_Three-_Ji%27nan_to_Mount_Tai_MET_DP105295.jpg" rel="nofollow noopener" target="_blank">The Kangxi Emperor’s Southern Inspection Tour</a> by Wang Hui</li>
-                <li><a href="https://commons.wikimedia.org/wiki/File:%E5%85%83_%E8%B6%99%E5%AD%9F%E9%A0%AB_%E9%9B%99%E6%9D%BE%E5%B9%B3%E9%81%A0%E5%9C%96_%E5%8D%B7-Twin_Pines,_Level_Distance_MET_DP153682.jpg" rel="nofollow noopener" target="_blank">Twin Pines, Level Distance</a> by Zhao Mengfu</li>
-            </ul>
-        </aside>
-        <p>
-            © 2024 Amphiluke<br>
-            <a href="https://github.com/Amphiluke/handy-scroll">handy-scroll on GitHub</a>
-        </p>
-    </footer>
-
-    <script src="js/handy-scroll.es6.min.js?v1.1.5"></script>
-    <script src="js/main.min.js?v1.1.5"></script>
+  <script type="module" src="js/handy-scroll.mjs?v2.0.0"></script>
+  <script type="module" src="js/main.mjs?v2.0.0"></script>
+  <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 </body>
 </html>
