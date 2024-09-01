@@ -26,7 +26,7 @@ import "handy-scroll";
 If you don’t use bundlers, just import the component as a module in your HTML files:
 
 ```html
-<script type="module" src="https://unpkg.com/handy-scroll"></script>
+<script type="module" src="https://esm.run/handy-scroll"></script>
 ```
 
 ## Standard usage
