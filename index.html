@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>handy-scroll</title>
+
+    <style>
+      body {
+        font: normal 1.2rem / 1.4 system-ui, sans-serif;
+        width: 50vw;
+        margin: 2rem auto;
+      }
+      .custom-viewport {
+        height: 50vh;
+        border: 1px solid;
+        margin-bottom: 1em;
+        overflow: auto;
+        padding: 0 0.5em;
+      }
+      .scrollable {
+        overflow: auto;
+        border: 1px solid;
+      }
+      .wide-content {
+        width: 150vw;
+      }
+      handy-scroll {
+        background: rgba(255 0 0 / 0.25);
+      }
+    </style>
+  
+  </head>
+  <body>
+    <script type="module" src="/src/handy-scroll.mjs"></script>
+
+
+    <div class="custom-viewport" id="custom-viewport">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate repellendus nulla eos! Incidunt ipsa repellat magni blanditiis quis nihil suscipit sint temporibus doloremque debitis, id accusamus veniam maxime excepturi aspernatur.</p>
+      <p>Nemo ea at, nesciunt voluptate optio quidem voluptatem illum qui sunt nobis assumenda explicabo omnis eum, rerum quis accusantium incidunt hic, labore tempora dolorem. Dolorum, quia. Similique, esse labore. Non?</p>
+      <p>Voluptatum adipisci tempore nostrum eveniet autem praesentium, illum, blanditiis mollitia aliquid fugit dignissimos id cumque placeat, accusamus expedita ducimus saepe fugiat hic? Earum laborum soluta, totam porro dolor repellat deleniti.</p>
+      <p>Officia at vitae deserunt ex soluta harum fugiat aliquam repudiandae corporis necessitatibus nesciunt corrupti saepe quis adipisci facere, aut qui rem illum accusantium. Fugiat repellendus excepturi eum et maiores iure!</p>
+      <p>In, quasi! Vel doloremque asperiores maiores explicabo aliquam, praesentium voluptatem at dolorum sapiente consequuntur modi adipisci numquam aut, iusto quas, reprehenderit ut? Vel ullam libero, sed ut reprehenderit cum accusantium.</p>
+    
+      <div class="scrollable" id="custom-viewport-scrollable">
+        <div class="wide-content">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus ullam nam sint dicta qui dolorem, vitae corrupti dolore eveniet deserunt possimus laboriosam, accusamus enim aperiam minima magni doloribus eum necessitatibus.</p>
+          <p>Voluptas nam eum eveniet sit blanditiis exercitationem atque autem consectetur sequi similique. Eveniet, amet sapiente optio dolores obcaecati tempore unde iste sunt, aliquam voluptates perspiciatis delectus ut! Cum, expedita quod?</p>
+          <p>Fugiat, doloribus similique labore ea fugit, magnam voluptatum placeat libero, sint omnis numquam molestias! Est ea quis laudantium non commodi pariatur, et quae aliquid nobis vero sint, eos dolorem fugit.</p>
+          <p>Atque optio possimus, recusandae expedita debitis nihil laboriosam maiores rerum repellat cum eaque dolorum! Asperiores, at. Beatae voluptates obcaecati doloremque quis optio, ab nam autem ipsam tempore! Possimus, distinctio dolores!</p>
+          <p>Corporis, repellendus accusamus laudantium est laboriosam odit distinctio, praesentium quas illum iure, nesciunt magnam? Nisi hic voluptas molestias nam, necessitatibus, libero nihil, enim in ad reprehenderit neque veniam quidem beatae.</p>
+          <p>Commodi enim aspernatur atque laborum dicta quisquam itaque repudiandae maxime consectetur beatae dolor blanditiis labore saepe, id, qui nam quam fugit ipsa? Est atque, itaque quisquam aut non ex voluptate.</p>
+          <p>Cupiditate eos possimus nam magni odio nostrum ex asperiores libero magnam. Id, consequatur doloribus deleniti optio qui ratione alias iure corrupti saepe quas veritatis harum officia. Non iste possimus culpa!</p>
+          <p>Amet ut recusandae libero aliquid, voluptates laudantium veritatis dolorem sint tempora ullam repellat pariatur inventore animi cumque facilis doloremque aliquam minima quam aspernatur similique. Cupiditate sapiente sint quaerat. Quam, a.</p>
+          <p>Officia, nobis ullam dolorum perspiciatis nesciunt quia molestiae vitae sunt adipisci! Expedita est blanditiis, enim alias, deserunt dignissimos temporibus vel reprehenderit consectetur tenetur quia quae dolore, deleniti obcaecati explicabo cum!</p>
+          <p>Pariatur temporibus, deleniti assumenda reiciendis laudantium numquam voluptatem quos! Cum quasi facilis aliquid alias beatae praesentium dicta ad error reprehenderit veniam, sint accusamus veritatis quos iusto earum tempore illum molestiae.</p>
+        </div>
+      </div>
+      <handy-scroll owner="custom-viewport-scrollable" viewport="custom-viewport"></handy-scroll>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat aspernatur non tenetur veritatis, suscipit dolores adipisci cumque quisquam libero ullam itaque sit quaerat accusantium velit sequi porro nobis asperiores illo!</p>
+      <p>Eligendi blanditiis quisquam aliquam, maxime eveniet impedit porro ratione eos natus quis alias consequatur deserunt facere ea iusto optio voluptatum dolorum! Ipsam, sunt voluptas vero suscipit ex distinctio voluptate nulla.</p>
+    </div>
+
+    <div class="scrollable" id="default-viewport-scrollable">
+      <div class="wide-content">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eveniet maiores ipsam natus aperiam laboriosam beatae, doloremque a est reiciendis ducimus reprehenderit numquam consectetur neque quam illum cum ad officia.</p>
+        <p>Laboriosam, sed perferendis harum doloremque sapiente reiciendis reprehenderit maxime omnis mollitia porro? Voluptatibus omnis aspernatur et cupiditate optio quaerat rerum assumenda ullam, ea architecto iure, esse deleniti delectus nisi! Tempora!</p>
+        <p>Nulla ratione at possimus quibusdam nam nisi optio adipisci voluptatem amet dicta neque molestias voluptas consequatur, nemo quod quisquam recusandae velit error doloribus quae ipsum inventore tempora autem. Laborum, deserunt?</p>
+        <p>Inventore illo consectetur modi fugiat, suscipit, quae est doloremque, asperiores distinctio tempora id. Fugiat omnis aliquid animi, vero quod dicta minus non voluptates, corporis ut molestias, est voluptatem saepe dolore.</p>
+        <p>Quod ullam fugiat sed ab in, eveniet molestiae nisi eaque, tempore molestias aspernatur aut enim id, necessitatibus ducimus officia. Rerum debitis ad quidem blanditiis qui nesciunt veritatis earum consequuntur repellat.</p>
+        <p>Pariatur eveniet aut ullam explicabo, harum repudiandae distinctio, esse aperiam et nesciunt, hic nulla ducimus sunt doloremque quidem corrupti tenetur suscipit minima rerum animi laudantium culpa! Quos soluta perferendis tempore!</p>
+        <p>Debitis dignissimos autem, unde necessitatibus, provident nam animi iure, magnam ratione enim magni nemo commodi ad dolores consequuntur. Repellat minima ad ea accusantium eligendi sequi consequatur porro vero voluptas est!</p>
+        <p>Sed harum aperiam dolorem, quo amet necessitatibus molestiae quis, perspiciatis natus eveniet soluta nemo exercitationem cumque explicabo. Doloremque, exercitationem sunt iusto optio officia veritatis, atque earum expedita pariatur aut rerum.</p>
+        <p>Eius repudiandae earum accusantium at asperiores? Voluptatum architecto harum, nam nisi atque expedita, laboriosam placeat laudantium quae, dolor recusandae cum officiis fugiat provident labore asperiores minima incidunt reiciendis velit porro!</p>
+        <p>Placeat deserunt molestias doloribus modi veritatis, ut fugiat soluta quam. Consequuntur aut autem reiciendis fugiat dolore voluptates reprehenderit. Ducimus inventore totam sunt consequatur incidunt magni optio odio molestiae dolores et!</p>
+      </div>
+    </div>
+    <handy-scroll owner="default-viewport-scrollable"></handy-scroll>
+  </body>
+</html>

@@ -1,132 +1,75 @@
 # handy-scroll
 
-Handy dependency-free floating scrollbar widget
+Handy dependency-free floating scrollbar web component.
 
 ## Synopsis
 
-handy-scroll is a dependency-free module which can be used to solve the problem of scrolling some lengthy containers horizontally when those containers don’t fit into the viewport. The widget is just a scrollbar which is attached at the bottom of the container’s visible area. It doesn’t get out of sight when the page is scrolled, thereby making horizontal scrolling of the container much handier.
+handy-scroll is a dependency-free web component which can be used to solve the problem of scrolling lengthy containers horizontally when those containers don’t fit into the viewport. The component is just a scrollbar which is attached at the bottom of the container’s visible area. It doesn’t get out of sight when the page is scrolled, thereby making horizontal scrolling of the container much handier.
 
-> [!TIP]
-> * If you are rather looking for a jQuery plugin with the same functionality, please check out the sibling project [floating-scroll](https://github.com/Amphiluke/floating-scroll) instead.
-> * Developing a Vue.js-based app? Consider using the [vue-handy-scroll](https://github.com/Amphiluke/vue-handy-scroll) component.
+> [!NOTE]
+> Current version of the component targets modern browsers only. If you need to support older browser versions, please stick to the former implementation [handy-scroll@1.x](https://github.com/Amphiluke/handy-scroll/tree/v1).
 
-## Usage
+## Installation and import
 
-The widget requires the CSS file [handy-scroll.css](dist/handy-scroll.css) to be included on the page (you may also import it in your CSS/LESS files). The module script file [handy-scroll.min.js](dist/handy-scroll.min.js) may be added on the web page either via a separate `<script>` element, or it may be loaded by any AMD/CommonJS compatible module loader.
+If you use a bundler in your project, install handy-scroll as a dependency:
 
-:bulb: **Tip:** If you don’t care about supporting Internet Explorer, feel free to use the file [handy-scroll.es6.min.js](dist/handy-scroll.es6.min.js), which is de facto the same as handy-scroll.min.js but is written in ES6, and is a bit smaller.
-
-The handy-scroll package is available on npm, so you may add it to your project as usual:
-
-```
+```shell
 npm install handy-scroll
 ```
 
-## Details & API
-
-The module exports a single object `handyScroll` which provides the following methods:
-
-* [`mount`](#mounting-the-widget) — initializes and “mounts” the widgets in the specified containers;
-* [`mounted`](#checking-widget-existence) — checks if the widget is already mounted in the given container;
-* [`update`](#updating-scrollbar) — updates the widget parameters and position;
-* [`destroy`](#destroying-the-widget) — destroys the widgets mounted in the specified containers and removes all related event handlers;
-* [`destroyDetached`](#destroying-detached-widgets) — destroys handy-scroll widget instances whose containers were removed from the document.
-
-### Mounting the widget
-
-The only thing required to attach the widget to a static container (whose sizes will never change during the session) is a single call of the `handyScroll.mount()` method. The method expects a single argument, the target containers reference, which can be either an element, or a list of elements, or a selector.
+Now you may import it wherever it’s needed:
 
 ```javascript
-// mount widget in the specified container element
-handyScroll.mount(document.getElementById("spacious-container"));
-
-// mount widgets in all the container elements in the collection
-handyScroll.mount(document.getElementsByClassName("spacious-container"));
-handyScroll.mount([myDOMElement1, myDOMElement2, myDOMElement3]);
-
-// mount widgets in all the container elements matching the selector
-handyScroll.mount(".examples > .spacious-container");
+import "handy-scroll";
 ```
 
-### Auto-initialisation
-
-There is another way to mount the handy-scroll widget without writing a single line of JavaScript code. Just add the attribute `data-handy-scroll` to the desired containers. As the DOM is ready the module will detect all such elements and will mount widgets automatically.
+If you don’t use bundlers, just import the component as a module in your HTML files:
 
 ```html
-<div class="spacious-container" data-handy-scroll>
+<script type="module" src="https://unpkg.com/handy-scroll"></script>
+```
+
+## Standard usage
+
+Drop the custom element `<handy-scroll>` where you need in your markup and link the component to the horizontally-scrollable target using the `owner` attribute:
+
+```html
+<div id="horizontally-scrollable">
+  <!-- Horizontally wide contents -->
+</div>
+<handy-scroll owner="horizontally-scrollable"></handy-scroll>
+```
+
+## Custom viewport element
+
+Standard use case above implies that handy-scroll will stick to the bottom of the browser window viewport. If instead you want to attach a floating scrollbar at the bottom of your custom scrollable “viewport” (e.g. a scrollable modal popup), then you need to link the component to your custom viewport element using the `viewport` attribute:
+
+```html
+<div id="custom-viewport">
+  <div id="horizontally-scrollable">
     <!-- Horizontally wide contents -->
+  </div>
+  <handy-scroll owner="horizontally-scrollable" viewport="custom-viewport"></handy-scroll>
 </div>
 ```
 
-### Checking widget existence
+## API
 
-You may check if the widget is already mounted in the given container by calling the `handyScroll.mounted()` method.
+### `HandyScroll.prototype.update()`
 
-```javascript
-handyScroll.mount("#spacious-container");
-console.log(handyScroll.mounted("#spacious-container")); // true
-```
-
-### Updating scrollbar
-
-If you mount the widget in a container whose size and/or content may dynamically change, you need a way to update the scrollbar each time the container’s sizes change. This can be done by invoking the method `handyScroll.update()` as in the example below.
+handy-scroll automatically tracks viewport changes in order to keep the component’s size, position and visibility in sync with the owner’s metrics. However there can be some cases when you’ll need to trigger the component update programmatically (e.g. after some changes in DOM). To do so, just call the method `update()` on the specific `<handy-scroll>` element:
 
 ```javascript
-handyScroll.mount(".spacious-container");
-// ... some actions which change the total scroll width of the container ...
-handyScroll.update(".spacious-container");
+document.getElementById("my-handy-scroll").update();
 ```
 
-The method expects a single argument, the target containers reference, which can be either an element, or a list of elements, or a selector.
+### `HandyScroll.prototype.owner`
 
-### Destroying the widget
+Reflects the value of the `owner` attribute, which in turn should reference the `id` attribute of the horizontally-scrollable container (owner).
 
-To unmount the widget and remove all related event handlers, use the method `handyScroll.destroy()` as follows:
+### `HandyScroll.prototype.viewport`
 
-```javascript
-handyScroll.destroy(".spacious-container");
-```
-
-The method expects a single argument, the target containers reference, which can be either an element, or a list of elements, or a selector.
-
-
-### Destroying detached widgets
-
-If your app completely re-renders a large portion of DOM where handy-scroll widgets were mounted, actual container references are lost, and therefore you cannot unmount the widgets and perform related cleanup using the `destroy` method. In this case, you may just call the `handyScroll.destroyDetached()` method, and the module will find all “zombie” instances and will destroy them for you.
-
-```javascript
-handyScroll.mount(".main-view .spacious-container");
-// ... the app re-renders the main view ...
-document.querySelector(".main-view").innerHTML = "...";
-// destroy handy-scroll widgets whose containers are not in the document anymore
-handyScroll.destroyDetached();
-```
-
-### Special cases
-
-If you want to attach the widget to a container living in a positioned box (e.g. a modal popup with `position: fixed`) then you need to apply two special indicating class names in the markup. The module detects these indicating class names (they are prefixed with `handy-scroll-`) and switches to a special functioning mode.
-
-```html
-<div class="handy-scroll-viewport"><!-- (1) -->
-    <div class="handy-scroll-body"><!-- (2) -->
-        <div class="spacious-container">
-            <!-- Horizontally wide contents -->
-        </div>
-    </div>
-</div>
-```
-
-The `.handy-scroll-viewport` element (1) is a positioned block (with any type of positioning except `static`) which serves for correct positioning of the widget. Note that this element itself should _not_ be scrollable. The `.handy-scroll-body` element (2) is a vertically scrollable block (with `overflow: auto`) which encloses the target container the widget is mounted in. After applying these special class names, you may initialise the widget as usual:
-
-```javascript
-handyScroll.mount(".spacious-container");
-```
-
-The [handy-scroll.css](dist/handy-scroll.css) file provides some basic styles for elements with classes `.handy-scroll-viewport` and `.handy-scroll-body`. Feel free to adjust their styles in your stylesheets as needed.
-
-### “Unobtrusive” mode
-
-You can make the widget more “unobtrusive” so that it will appear only when the mouse pointer hovers over the scrollable container. To do so just apply the class `handy-scroll-hoverable` to the desired scrollable container owning the widget.
+Reflects the value of the `viewport` attribute, which (if present) should reference the `id` attribute of the element serving as custom viewport.
 
 ## Live demos
 
