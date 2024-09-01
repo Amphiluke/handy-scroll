@@ -21,5 +21,6 @@ ${pkg.homepage}
 */`,
       },
     },
+    emptyOutDir: false,
   },
 };
