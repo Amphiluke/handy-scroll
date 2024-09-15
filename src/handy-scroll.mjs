@@ -4,7 +4,7 @@ let getAttributeErrorMessage = (attribute) => `Attribute ‘${attribute}’ must
 
 class HandyScroll extends HTMLElement {
   static get observedAttributes() {
-    return ["owner", "viewport"];
+    return ["owner", "viewport", "hidden"];
   }
 
   #internals = null;
@@ -71,6 +71,12 @@ class HandyScroll extends HTMLElement {
 
   attributeChangedCallback(name) {
     if (!this.#eventHandlers.size) { // handle only dynamic changes when the element is completely connected
+      return;
+    }
+    if (name === "hidden") {
+      if (!this.hasAttribute("hidden")) {
+        this.update();
+      }
       return;
     }
     if (name === "owner") {

@@ -31,8 +31,11 @@
   }
 }
 
-:host([viewport]) {
+:host([viewport]:not([hidden])) {
   display: block;
+}
+
+:host([viewport]) {
   position: sticky;
 }
 

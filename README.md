@@ -29,6 +29,12 @@ If you don’t use bundlers, just import the component as a module in your HTML 
 <script type="module" src="https://esm.run/handy-scroll"></script>
 ```
 
+or in your ES modules:
+
+```javascript
+import "https://esm.run/handy-scroll";
+```
+
 ## Standard usage
 
 Drop the custom element `<handy-scroll>` where you need in your markup and link the component to the horizontally-scrollable target using the `owner` attribute:
