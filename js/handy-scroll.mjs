@@ -1,13 +1,13 @@
 /*!
-handy-scroll v2.0.0
+handy-scroll v2.0.2
 https://amphiluke.github.io/handy-scroll/
 (c) 2024 Amphiluke
 */
-const o = ':host{bottom:0;min-height:17px;overflow:auto;position:fixed}.strut{height:1px;overflow:hidden;pointer-events:none;&:before{content:" "}}:host,.strut{font-size:1px;line-height:0;margin:0;padding:0}:host(:state(latent)){bottom:110vh;.strut:before{content:"  "}}:host([viewport]){display:block;position:sticky}:host([viewport]:state(latent)){position:fixed}';
+const o = ':host{bottom:0;min-height:17px;overflow:auto;position:fixed}.strut{height:1px;overflow:hidden;pointer-events:none;&:before{content:" "}}:host,.strut{font-size:1px;line-height:0;margin:0;padding:0}:host(:state(latent)){bottom:110vh;.strut:before{content:"  "}}:host([viewport]:not([hidden])){display:block}:host([viewport]){position:sticky}:host([viewport]:state(latent)){position:fixed}';
 let h = (n) => `Attribute ‘${n}’ must reference a valid container ‘id’`;
 class r extends HTMLElement {
   static get observedAttributes() {
-    return ["owner", "viewport"];
+    return ["owner", "viewport", "hidden"];
   }
   #o = null;
   #t = null;
@@ -47,7 +47,13 @@ class r extends HTMLElement {
     this.#w(), this.#p(), this.#e = this.#t = null;
   }
   attributeChangedCallback(t) {
-    this.#i.size && (t === "owner" ? this.#a() : t === "viewport" && this.#c(), this.#w(), this.#p(), this.#u(), this.#f(), this.update());
+    if (this.#i.size) {
+      if (t === "hidden") {
+        this.hasAttribute("hidden") || this.update();
+        return;
+      }
+      t === "owner" ? this.#a() : t === "viewport" && this.#c(), this.#w(), this.#p(), this.#u(), this.#f(), this.update();
+    }
   }
   #a() {
     let t = this.getAttribute("owner");
