@@ -13,7 +13,7 @@ class HandyScroll extends HTMLElement {
   #owner = null;
   #strut = null;
 
-  #eventHandlers = new Map();
+  #eventController = null;
   #resizeObserver = null;
 
   #syncingOwner = true;
@@ -70,7 +70,7 @@ class HandyScroll extends HTMLElement {
   }
 
   attributeChangedCallback(name) {
-    if (!this.#eventHandlers.size) { // handle only dynamic changes when the element is completely connected
+    if (!this.#eventController) { // handle only dynamic changes when the element is completely connected
       return;
     }
     if (name === "hidden") {
@@ -112,48 +112,44 @@ class HandyScroll extends HTMLElement {
   }
 
   #addEventHandlers() {
-    this.#eventHandlers.set(this.#viewport, {
-      scroll: () => this.#recheckLatency(),
-      ...(this.#viewport === window ? {resize: () => this.update()} : {}),
-    });
-    this.#eventHandlers.set(this, {
-      scroll: () => {
-        if (this.#syncingOwner && !this.#isLatent) {
-          this.#syncOwner();
-        }
-        // Resume component->owner syncing after the component scrolling has finished
-        // (it might be temporally disabled by the owner while syncing the component)
-        this.#syncingOwner = true;
-      },
-    });
-    this.#eventHandlers.set(this.#owner, {
-      scroll: () => {
-        if (this.#syncingComponent) {
+    this.#eventController = new AbortController();
+    let options = {signal: this.#eventController.signal};
+
+    this.#viewport.addEventListener("scroll", () => this.#recheckLatency(), options);
+    if (this.#viewport === window) {
+      this.#viewport.addEventListener("resize", () => this.update(), options);
+    }
+
+    this.addEventListener("scroll", () => {
+      if (this.#syncingOwner && !this.#isLatent) {
+        this.#syncOwner();
+      }
+      // Resume component->owner syncing after the component scrolling has finished
+      // (it might be temporally disabled by the owner while syncing the component)
+      this.#syncingOwner = true;
+    }, options);
+
+    this.#owner.addEventListener("scroll", () => {
+      if (this.#syncingComponent) {
+        this.#syncComponent();
+      }
+      // Resume owner->component syncing after the owner scrolling has finished
+      // (it might be temporally disabled by the component while syncing the owner)
+      this.#syncingComponent = true;
+    }, options);
+    this.#owner.addEventListener("focusin", () => {
+      setTimeout(() => {
+        // The widget might be destroyed before the timer is triggered (issue #14)
+        if (this.isConnected) {
           this.#syncComponent();
         }
-        // Resume owner->component syncing after the owner scrolling has finished
-        // (it might be temporally disabled by the component while syncing the owner)
-        this.#syncingComponent = true;
-      },
-      focusin: () => {
-        setTimeout(() => {
-          // The widget might be destroyed before the timer is triggered (issue #14)
-          if (this.isConnected) {
-            this.#syncComponent();
-          }
-        }, 0);
-      },
-    });
-    this.#eventHandlers.forEach((handlers, el) => {
-      Object.entries(handlers).forEach(([event, handler]) => el.addEventListener(event, handler, false));
-    });
+      }, 0);
+    }, options);
   }
 
   #removeEventHandlers() {
-    this.#eventHandlers.forEach((handlers, el) => {
-      Object.entries(handlers).forEach(([event, handler]) => el.removeEventListener(event, handler, false));
-    });
-    this.#eventHandlers.clear();
+    this.#eventController?.abort();
+    this.#eventController = null;
   }
 
   #addResizeObserver() {

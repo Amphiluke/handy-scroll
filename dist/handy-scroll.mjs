@@ -1,11 +1,11 @@
 /*!
-handy-scroll v2.0.2
+handy-scroll v2.0.3
 https://amphiluke.github.io/handy-scroll/
 (c) 2024 Amphiluke
 */
-const o = ':host{bottom:0;min-height:17px;overflow:auto;position:fixed}.strut{height:1px;overflow:hidden;pointer-events:none;&:before{content:" "}}:host,.strut{font-size:1px;line-height:0;margin:0;padding:0}:host(:state(latent)){bottom:110vh;.strut:before{content:"  "}}:host([viewport]:not([hidden])){display:block}:host([viewport]){position:sticky}:host([viewport]:state(latent)){position:fixed}';
-let h = (n) => `Attribute ‘${n}’ must reference a valid container ‘id’`;
-class r extends HTMLElement {
+const h = ':host{bottom:0;min-height:17px;overflow:auto;position:fixed}.strut{height:1px;overflow:hidden;pointer-events:none;&:before{content:" "}}:host,.strut{font-size:1px;line-height:0;margin:0;padding:0}:host(:state(latent)){bottom:110vh;.strut:before{content:"  "}}:host([viewport]:not([hidden])){display:block}:host([viewport]){position:sticky}:host([viewport]:state(latent)){position:fixed}';
+let n = (s) => `Attribute ‘${s}’ must reference a valid container ‘id’`;
+class o extends HTMLElement {
   static get observedAttributes() {
     return ["owner", "viewport", "hidden"];
   }
@@ -13,7 +13,7 @@ class r extends HTMLElement {
   #t = null;
   #e = null;
   #s = null;
-  #i = /* @__PURE__ */ new Map();
+  #i = null;
   #n = null;
   #r = !0;
   #l = !0;
@@ -38,27 +38,27 @@ class r extends HTMLElement {
   constructor() {
     super();
     let t = this.attachShadow({ mode: "open" }), e = document.createElement("style");
-    e.textContent = o, t.appendChild(e), this.#s = document.createElement("div"), this.#s.classList.add("strut"), t.appendChild(this.#s), this.#o = this.attachInternals();
+    e.textContent = h, t.appendChild(e), this.#s = document.createElement("div"), this.#s.classList.add("strut"), t.appendChild(this.#s), this.#o = this.attachInternals();
   }
   connectedCallback() {
-    this.#a(), this.#c(), this.#u(), this.#f(), this.update();
+    this.#a(), this.#c(), this.#u(), this.#p(), this.update();
   }
   disconnectedCallback() {
-    this.#w(), this.#p(), this.#e = this.#t = null;
+    this.#w(), this.#f(), this.#e = this.#t = null;
   }
   attributeChangedCallback(t) {
-    if (this.#i.size) {
+    if (this.#i) {
       if (t === "hidden") {
         this.hasAttribute("hidden") || this.update();
         return;
       }
-      t === "owner" ? this.#a() : t === "viewport" && this.#c(), this.#w(), this.#p(), this.#u(), this.#f(), this.update();
+      t === "owner" ? this.#a() : t === "viewport" && this.#c(), this.#w(), this.#f(), this.#u(), this.#p(), this.update();
     }
   }
   #a() {
     let t = this.getAttribute("owner");
     if (this.#e = document.getElementById(t), !this.#e)
-      throw new DOMException(h("owner"));
+      throw new DOMException(n("owner"));
   }
   #c() {
     if (!this.hasAttribute("viewport")) {
@@ -67,40 +67,30 @@ class r extends HTMLElement {
     }
     let t = this.getAttribute("viewport");
     if (this.#t = document.getElementById(t), !this.#t)
-      throw new DOMException(h("viewport"));
+      throw new DOMException(n("viewport"));
   }
   #u() {
-    this.#i.set(this.#t, {
-      scroll: () => this.#v(),
-      ...this.#t === window ? { resize: () => this.update() } : {}
-    }), this.#i.set(this, {
-      scroll: () => {
-        this.#r && !this.#h && this.#b(), this.#r = !0;
-      }
-    }), this.#i.set(this.#e, {
-      scroll: () => {
-        this.#l && this.#d(), this.#l = !0;
-      },
-      focusin: () => {
-        setTimeout(() => {
-          this.isConnected && this.#d();
-        }, 0);
-      }
-    }), this.#i.forEach((t, e) => {
-      Object.entries(t).forEach(([i, s]) => e.addEventListener(i, s, !1));
-    });
+    this.#i = new AbortController();
+    let t = { signal: this.#i.signal };
+    this.#t.addEventListener("scroll", () => this.#v(), t), this.#t === window && this.#t.addEventListener("resize", () => this.update(), t), this.addEventListener("scroll", () => {
+      this.#r && !this.#h && this.#b(), this.#r = !0;
+    }, t), this.#e.addEventListener("scroll", () => {
+      this.#l && this.#d(), this.#l = !0;
+    }, t), this.#e.addEventListener("focusin", () => {
+      setTimeout(() => {
+        this.isConnected && this.#d();
+      }, 0);
+    }, t);
   }
   #w() {
-    this.#i.forEach((t, e) => {
-      Object.entries(t).forEach(([i, s]) => e.removeEventListener(i, s, !1));
-    }), this.#i.clear();
+    this.#i?.abort(), this.#i = null;
   }
-  #f() {
+  #p() {
     this.#t !== window && (this.#n = new ResizeObserver(([t]) => {
       t.contentBoxSize?.[0]?.inlineSize && this.update();
     }), this.#n.observe(this.#t));
   }
-  #p() {
+  #f() {
     this.#n?.disconnect(), this.#n = null;
   }
   #b() {
@@ -124,7 +114,7 @@ class r extends HTMLElement {
     i.width = `${t}px`, this.#t === window && (i.left = `${this.#e.getBoundingClientRect().left}px`), this.#s.style.width = `${e}px`, e > t && (i.height = `${this.offsetHeight - this.clientHeight + 1}px`), this.#d(), this.#v();
   }
 }
-customElements.define("handy-scroll", r);
+customElements.define("handy-scroll", o);
 export {
-  r as default
+  o as default
 };
