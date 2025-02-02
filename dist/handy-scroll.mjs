@@ -1,7 +1,7 @@
 /*!
 handy-scroll v2.0.3
 https://amphiluke.github.io/handy-scroll/
-(c) 2024 Amphiluke
+(c) 2025 Amphiluke
 */
 const h = ':host{bottom:0;min-height:17px;overflow:auto;position:fixed}.strut{height:1px;overflow:hidden;pointer-events:none;&:before{content:" "}}:host,.strut{font-size:1px;line-height:0;margin:0;padding:0}:host(:state(latent)){bottom:110vh;.strut:before{content:"  "}}:host([viewport]:not([hidden])){display:block}:host([viewport]){position:sticky}:host([viewport]:state(latent)){position:fixed}';
 let n = (s) => `Attribute ‘${s}’ must reference a valid container ‘id’`;
