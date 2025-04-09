@@ -1,5 +1,8 @@
 import css from "./handy-scroll.css?inline";
 
+const stylesheet = new CSSStyleSheet();
+stylesheet.replaceSync(css);
+
 let getAttributeErrorMessage = (attribute) => `Attribute ‘${attribute}’ must reference a valid container ‘id’`;
 
 class HandyScroll extends HTMLElement {
@@ -44,9 +47,7 @@ class HandyScroll extends HTMLElement {
     super();
     let shadowRoot = this.attachShadow({mode: "open"});
 
-    let style = document.createElement("style");
-    style.textContent = css;
-    shadowRoot.appendChild(style);
+    shadowRoot.adoptedStyleSheets = [stylesheet];
 
     this.#strut = document.createElement("div");
     this.#strut.classList.add("strut");

@@ -3,9 +3,10 @@ handy-scroll v2.0.3
 https://amphiluke.github.io/handy-scroll/
 (c) 2025 Amphiluke
 */
-const h = ':host{bottom:0;min-height:17px;overflow:auto;position:fixed}.strut{height:1px;overflow:hidden;pointer-events:none;&:before{content:" "}}:host,.strut{font-size:1px;line-height:0;margin:0;padding:0}:host(:state(latent)){bottom:110vh;.strut:before{content:"  "}}:host([viewport]:not([hidden])){display:block}:host([viewport]){position:sticky}:host([viewport]:state(latent)){position:fixed}';
+const o = ':host{bottom:0;min-height:17px;overflow:auto;position:fixed}.strut{height:1px;overflow:hidden;pointer-events:none;&:before{content:" "}}:host,.strut{font-size:1px;line-height:0;margin:0;padding:0}:host(:state(latent)){bottom:110vh;.strut:before{content:"  "}}:host([viewport]:not([hidden])){display:block}:host([viewport]){position:sticky}:host([viewport]:state(latent)){position:fixed}', h = new CSSStyleSheet();
+h.replaceSync(o);
 let n = (s) => `Attribute ‘${s}’ must reference a valid container ‘id’`;
-class o extends HTMLElement {
+class r extends HTMLElement {
   static get observedAttributes() {
     return ["owner", "viewport", "hidden"];
   }
@@ -37,8 +38,8 @@ class o extends HTMLElement {
   }
   constructor() {
     super();
-    let t = this.attachShadow({ mode: "open" }), e = document.createElement("style");
-    e.textContent = h, t.appendChild(e), this.#s = document.createElement("div"), this.#s.classList.add("strut"), t.appendChild(this.#s), this.#o = this.attachInternals();
+    let t = this.attachShadow({ mode: "open" });
+    t.adoptedStyleSheets = [h], this.#s = document.createElement("div"), this.#s.classList.add("strut"), t.appendChild(this.#s), this.#o = this.attachInternals();
   }
   connectedCallback() {
     this.#a(), this.#c(), this.#u(), this.#p(), this.update();
@@ -104,17 +105,17 @@ class o extends HTMLElement {
   #v() {
     let t = this.scrollWidth <= this.offsetWidth;
     if (!t) {
-      let e = this.#e.getBoundingClientRect(), i = this.#t === window ? window.innerHeight || document.documentElement.clientHeight : this.#t.getBoundingClientRect().bottom;
-      t = e.bottom <= i || e.top > i;
+      let i = this.#e.getBoundingClientRect(), e = this.#t === window ? window.innerHeight || document.documentElement.clientHeight : this.#t.getBoundingClientRect().bottom;
+      t = i.bottom <= e || i.top > e;
     }
     this.#h !== t && (this.#h = t);
   }
   update() {
-    let { clientWidth: t, scrollWidth: e } = this.#e, { style: i } = this;
-    i.width = `${t}px`, this.#t === window && (i.left = `${this.#e.getBoundingClientRect().left}px`), this.#s.style.width = `${e}px`, e > t && (i.height = `${this.offsetHeight - this.clientHeight + 1}px`), this.#d(), this.#v();
+    let { clientWidth: t, scrollWidth: i } = this.#e, { style: e } = this;
+    e.width = `${t}px`, this.#t === window && (e.left = `${this.#e.getBoundingClientRect().left}px`), this.#s.style.width = `${i}px`, i > t && (e.height = `${this.offsetHeight - this.clientHeight + 1}px`), this.#d(), this.#v();
   }
 }
-customElements.define("handy-scroll", o);
+customElements.define("handy-scroll", r);
 export {
-  o as default
+  r as default
 };
