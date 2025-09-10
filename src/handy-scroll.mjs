@@ -221,6 +221,8 @@ class HandyScroll extends HTMLElement {
   }
 }
 
-customElements.define("handy-scroll", HandyScroll);
+if (!customElements.get("handy-scroll")) {
+  customElements.define("handy-scroll", HandyScroll);
+}
 
 export default HandyScroll;
