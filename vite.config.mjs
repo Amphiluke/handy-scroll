@@ -14,13 +14,15 @@ export default {
     rollupOptions: {
       output: {
         entryFileNames: "[name].mjs",
-        banner: `/*!
+      },
+    },
+    emptyOutDir: false,
+  },
+  esbuild: {
+    banner: `/*!
 ${pkg.name} v${pkg.version}
 ${pkg.homepage}
 (c) ${new Date().getUTCFullYear()} ${pkg.author}
 */`,
-      },
-    },
-    emptyOutDir: false,
   },
 };
