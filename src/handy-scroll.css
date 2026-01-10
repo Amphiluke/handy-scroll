@@ -24,7 +24,7 @@
 }
 
 :host(:state(latent)) {
-  bottom: 110vh;
+  clip-path: inset(100%);
 
   .strut::before {
     content: "\A0\A0"; /* changing content fixes eventual bug with widget re-rendering in Chrome */
@@ -37,8 +37,4 @@
 
 :host([viewport]) {
   position: sticky;
-}
-
-:host([viewport]:state(latent)) {
-  position: fixed;
 }
