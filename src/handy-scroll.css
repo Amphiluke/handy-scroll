@@ -35,6 +35,6 @@
   display: block;
 }
 
-:host([viewport]) {
+:host([viewport]:not(:state(latent))) {
   position: sticky;
 }
