@@ -1,7 +1,7 @@
 import {resolve} from "node:path";
 import pkg from "./package.json" with {type: "json"};
 
-/** @type {import('vite').UserConfig} */
+/** @type {import("vite").UserConfig} */
 export default {
   build: {
     lib: {
@@ -11,18 +11,16 @@ export default {
       formats: ["es"],
     },
     target: "esnext",
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        entryFileNames: "[name].mjs",
-      },
-    },
-    emptyOutDir: false,
-  },
-  esbuild: {
-    banner: `/*!
+        banner: `/*!
 ${pkg.name} v${pkg.version}
 ${pkg.homepage}
 (c) ${new Date().getUTCFullYear()} ${pkg.author}
 */`,
+        entryFileNames: "[name].mjs",
+      },
+    },
+    emptyOutDir: false,
   },
 };
