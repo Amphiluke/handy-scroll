@@ -38,9 +38,9 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint": "^10.2.0",
-    "globals": "^17.4.0",
-    "terser": "^5.46.1",
-    "vite": "^8.0.8"
+    "eslint": "^10.5.0",
+    "globals": "^17.6.0",
+    "terser": "^5.48.0",
+    "vite": "^8.0.16"
   }
 }
