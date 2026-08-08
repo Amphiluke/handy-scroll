@@ -17,7 +17,7 @@
   },
   "homepage": "https://amphiluke.github.io/handy-scroll/",
   "devDependencies": {
-    "lightningcss-cli": "^1.30.2",
+    "lightningcss-cli": "^1.33.0",
     "normalize.css": "^8.0.1"
   }
 }
