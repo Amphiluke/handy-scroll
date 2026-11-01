@@ -4,7 +4,7 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["dist/*", "vite.config.mjs"],
+    ignores: ["dist/*"],
   },
   {
     files: ["src/**/*.mjs", "eslint.config.mjs"],

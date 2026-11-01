@@ -10,7 +10,11 @@ export default {
       fileName: "handy-scroll",
       formats: ["es"],
     },
+    minify: "terser",
     target: "esnext",
+    terserOptions: {
+      module: true,
+    },
     rolldownOptions: {
       output: {
         banner: `/*!
