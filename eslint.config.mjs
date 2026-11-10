@@ -7,7 +7,7 @@ export default [
     ignores: ["dist/*"],
   },
   {
-    files: ["src/**/*.mjs", "eslint.config.mjs"],
+    files: ["src/**/*.mjs", "tests/**/*.mjs", "eslint.config.mjs"],
     languageOptions: {
       ecmaVersion: 2024,
       sourceType: "module",

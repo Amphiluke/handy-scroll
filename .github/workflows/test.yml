@@ -1,4 +1,4 @@
-name: Lint
+name: Test
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
     branches:
       - master
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v7
@@ -16,3 +16,4 @@ jobs:
         node-version: 26
     - run: npm ci --ignore-scripts
     - run: npm run lint
+    - run: npm run test

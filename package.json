@@ -17,6 +17,7 @@
   "scripts": {
     "lint": "eslint",
     "dev": "vite",
+    "test": "vitest run",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -38,9 +39,11 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint": "^10.13.0",
-    "globals": "^17.13.0",
+    "@vitest/browser-playwright": "^5.1.0",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
     "terser": "^5.51.2",
-    "vite": "^8.3.5"
+    "vite": "^8.3.6",
+    "vitest": "^5.1.0"
   }
 }
