@@ -16,4 +16,5 @@ jobs:
         node-version: 26
     - run: npm ci --ignore-scripts
     - run: npm run lint
+    - run: npx playwright install --with-deps --only-shell
     - run: npm run test
