@@ -1,4 +1,4 @@
-import {describe, beforeAll, test, expect} from "vitest";
+import {describe, beforeAll, beforeEach, afterEach, test, expect} from "vitest";
 import {page} from "vitest/browser";
 import "../dist/handy-scroll.mjs";
 
@@ -18,12 +18,42 @@ beforeAll(() => {
         height: 150vh;
         width: 150vw;
       }
+      [data-testid="focusable"] {
+        margin-inline-start: 100vw;
+      }
     </style>`);
   document.body.insertAdjacentHTML("beforeend", `
     <div id="owner" data-testid="owner">
       <div data-testid="content"></div>
-    </div>
-    <handy-scroll owner="owner" data-testid="scrollbar"></handy-scroll>`);
+    </div>`);
+});
+
+beforeEach(() => {
+  document.body.insertAdjacentHTML("beforeend", "<handy-scroll owner=\"owner\" data-testid=\"scrollbar\"></handy-scroll>");
+});
+
+afterEach(() => {
+  document.body.querySelector("[data-testid='scrollbar']").remove();
+});
+
+
+describe("Attribute reflection", () => {
+  test("The “owner” attribute reflection", async () => {
+    const scrollbarLocator = page.getByTestId("scrollbar");
+    await expect.element(scrollbarLocator).toHaveAttribute("owner", scrollbarLocator.element().owner);
+    document.body.insertAdjacentHTML("beforeend", "<div id=\"new-owner\"></div>");
+    // Setting the DOM property updates the attribute
+    scrollbarLocator.element().owner = "new-owner";
+    await expect.element(scrollbarLocator).toHaveAttribute("owner", "new-owner");
+    // Setting the attribute udates the DOM property
+    scrollbarLocator.element().setAttribute("owner", "owner");
+    await expect.element(scrollbarLocator).toHaveAttribute("owner", scrollbarLocator.element().owner);
+    document.getElementById("new-owner").remove();
+  });
+
+  test("The “viewport” attrubute reflection", () => {
+    expect(page.getByTestId("scrollbar").element().viewport).toBeNull();
+  });
 });
 
 
@@ -87,13 +117,36 @@ describe("Scrolling", () => {
     }
   });
 
-  test("Syncing component with owner on programmatic scroll", async () => {
+  test("Syncing component with owner on programmatic scrolling", async () => {
     const ownerLocator = page.getByTestId("owner");
     const scrollbarLocator = page.getByTestId("scrollbar");
     const {scrollWidth} = ownerLocator.element();
-    for (const factor of [0.25, 1, -1]) {
-      await ownerLocator.element().scrollTo({x: Math.round(scrollWidth * factor)});
+    for (const factor of [0.25, 1, 0]) {
+      await ownerLocator.element().scroll({left: Math.round(scrollWidth * factor), behavior: "instant"});
       await expect.element(scrollbarLocator).toBeXScrolledTo(ownerLocator.element().scrollLeft);
     }
+  });
+
+  test("Syncing component with owner on clear the “hidden” attribute", async () => {
+    const ownerLocator = page.getByTestId("owner");
+    const scrollbarLocator = page.getByTestId("scrollbar");
+    scrollbarLocator.element().hidden = true;
+    await ownerLocator.element().scroll({left: 100, behavior: "instant"});
+    await expect.element(scrollbarLocator).not.toBeXScrolledTo(ownerLocator.element().scrollLeft);
+    scrollbarLocator.element().hidden = false;
+    await expect.element(scrollbarLocator).toBeXScrolledTo(ownerLocator.element().scrollLeft);
+    await ownerLocator.element().scroll({left: 0, behavior: "instant"});
+    await expect.element(scrollbarLocator).toBeXScrolledTo(0);
+  });
+
+  test("Syncing component with owner on focus-induced scrolling", async () => {
+    page.getByTestId("content").element().insertAdjacentHTML("beforeend", "<input data-testid=\"focusable\">");
+    const focusableLocator = page.getByTestId("focusable");
+    const ownerLocator = page.getByTestId("owner");
+    const scrollbarLocator = page.getByTestId("scrollbar");
+    focusableLocator.element().focus();
+    expect(ownerLocator.element().scrollLeft).toBeGreaterThan(0);
+    await expect.element(scrollbarLocator).toBeXScrolledTo(ownerLocator.element().scrollLeft);
+    focusableLocator.element().remove();
   });
 });
