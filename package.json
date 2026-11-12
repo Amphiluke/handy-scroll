@@ -17,7 +17,7 @@
   "scripts": {
     "lint": "eslint",
     "dev": "vite",
-    "test": "vitest run",
+    "test": "vitest run --reporter=tree",
     "build": "vite build",
     "preview": "vite preview"
   },

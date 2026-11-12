@@ -7,9 +7,9 @@ beforeAll(() => {
   document.head.insertAdjacentHTML("beforeend", `
     <style>
       body {
-        width: 50vw;
         margin: 2rem auto;
         padding-top: 200vh;
+        width: 50vw;
       }
       [data-testid="owner"] {
         overflow: auto;
@@ -63,12 +63,12 @@ describe("Latency", () => {
   });
 
   test("Component is operative when owner is within the viewport", async () => {
-    page.getByTestId("owner").element().scrollIntoView({block: "start", behavior: "instant"});
+    await page.getByTestId("owner").element().scrollIntoView({block: "start", behavior: "instant"});
     await expect.element(page.getByTestId("scrollbar")).not.toBeLatent();
   });
 
   test("Component is latent when owner’s own scrollbar is visible", async () => {
-    page.getByTestId("owner").element().scrollIntoView({block: "end", behavior: "instant"});
+    await page.getByTestId("owner").element().scrollIntoView({block: "end", behavior: "instant"});
     await expect.element(page.getByTestId("scrollbar")).toBeLatent();
   });
 
@@ -76,7 +76,7 @@ describe("Latency", () => {
     const contentLocator = page.getByTestId("content");
     const scrollbarLocator = page.getByTestId("scrollbar");
 
-    page.getByTestId("owner").element().scrollIntoView({block: "start", behavior: "instant"});
+    await page.getByTestId("owner").element().scrollIntoView({block: "start", behavior: "instant"});
     await expect.element(scrollbarLocator).not.toBeLatent();
 
     contentLocator.element().style.setProperty("width", "90%");
@@ -91,10 +91,23 @@ describe("Latency", () => {
 
 
 describe("Scrolling", () => {
+  beforeEach(async () => {
+    await page.getByTestId("owner").element().scrollIntoView({block: "start", behavior: "instant"});
+  });
+
   test("Component and owner have equal scroll widths", () => {
     const ownerLocator = page.getByTestId("owner");
     const scrollbarLocator = page.getByTestId("scrollbar");
     expect(ownerLocator.element().scrollWidth).toBe(scrollbarLocator.element().scrollWidth);
+  });
+
+  test("Component is pinned to the viewport’s bottom", async () => {
+    const bottom = document.documentElement.clientHeight;
+    const ownerLocator = page.getByTestId("owner");
+    const scrollbarLocator = page.getByTestId("scrollbar");
+    expect(scrollbarLocator.element().getBoundingClientRect().bottom).toBe(bottom);
+    await ownerLocator.element().scrollIntoView({block: "center", behavior: "instant"});
+    expect(scrollbarLocator.element().getBoundingClientRect().bottom).toBe(bottom);
   });
 
   test("Syncing component with owner on wheel", async () => {
