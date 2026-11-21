@@ -1,7 +1,8 @@
-import {describe, beforeAll, beforeEach, afterEach, test, expect} from "vitest";
+import {describe, beforeAll, beforeEach, afterEach, test, expect, inject} from "vitest";
 import {page} from "vitest/browser";
 import "../dist/handy-scroll.mjs";
 
+const viewportSize = inject("viewportSize");
 
 beforeAll(() => {
   document.head.insertAdjacentHTML("beforeend", `
@@ -9,14 +10,13 @@ beforeAll(() => {
       body {
         margin: 2rem auto;
         padding-top: 200vh;
-        width: 50vw;
       }
       [data-testid="owner"] {
         overflow: auto;
       }
       [data-testid="content"] {
-        height: 150vh;
-        width: 150vw;
+        height: ${viewportSize.height + 500}px;
+        width: ${viewportSize.width + 500}px;
       }
       [data-testid="focusable"] {
         margin-inline-start: 100vw;
@@ -70,6 +70,15 @@ describe("Latency", () => {
   test("Component is latent when owner’s own scrollbar is visible", async () => {
     await page.getByTestId("owner").element().scrollIntoView({block: "end", behavior: "instant"});
     await expect.element(page.getByTestId("scrollbar")).toBeLatent();
+  });
+
+  test("Component is latent when owner is not scrollable", async () => {
+    await page.getByTestId("owner").element().scrollIntoView({block: "start", behavior: "instant"});
+    await expect.element(page.getByTestId("scrollbar")).not.toBeLatent();
+    await page.viewport(viewportSize.width + 700, viewportSize.height);
+    await expect.element(page.getByTestId("scrollbar")).toBeLatent();
+    await page.viewport(viewportSize.width, viewportSize.height);
+    await expect.element(page.getByTestId("scrollbar")).not.toBeLatent();
   });
 
   test("Forced manual recalculation of latency", async () => {
